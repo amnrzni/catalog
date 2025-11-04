@@ -20,21 +20,21 @@ export default function Card({
   padding = 'default',
   onClick,
 }: CardProps) {
-  const baseStyles = 'rounded-2xl transition-all duration-300';
+  const baseStyles = 'rounded-3xl transition-all duration-500 ease-out';
 
   const glassStyles = glassmorphism
-    ? 'glass shadow-lg'
-    : 'bg-background-secondary shadow-md';
+    ? 'glass shadow-xl'
+    : 'bg-background-secondary shadow-lg';
 
   const hoverStyles = hover
-    ? 'hover:-translate-y-2 hover:shadow-deep cursor-pointer glow-hover'
+    ? 'hover:-translate-y-3 hover:shadow-[0_30px_80px_rgba(139,92,246,0.3)] cursor-pointer hover:border-primary/30 hover:scale-[1.02]'
     : '';
 
   const paddingStyles = {
     none: 'p-0',
-    small: 'p-4',
-    default: 'p-6',
-    large: 'p-8',
+    small: 'p-5',
+    default: 'p-7',
+    large: 'p-10',
   };
 
   const Component = onClick ? 'button' : 'div';

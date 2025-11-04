@@ -33,40 +33,40 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 glass-strong border-b border-white/10">
+    <header className="sticky top-0 z-50 glass-strong border-b border-primary/10 shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
-              <span className="text-white font-bold text-lg">U</span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-primary to-primary-dark flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+              <span className="text-white font-bold text-xl">U</span>
             </div>
-            <span className="text-xl font-bold gradient-text">UI/UX Catalog</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-primary-light via-primary to-primary-dark bg-clip-text text-transparent">UI/UX Catalog</span>
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-2">
             <Link
               href="/components"
-              className="text-text-secondary hover:text-primary transition-colors"
+              className="px-4 py-2 rounded-xl text-text-secondary hover:text-primary-light hover:bg-primary/10 transition-all font-medium"
             >
               Components
             </Link>
             <Link
               href="/use-cases"
-              className="text-text-secondary hover:text-primary transition-colors"
+              className="px-4 py-2 rounded-xl text-text-secondary hover:text-primary-light hover:bg-primary/10 transition-all font-medium"
             >
               Use Cases
             </Link>
             <Link
               href="/design-tokens"
-              className="text-text-secondary hover:text-primary transition-colors"
+              className="px-4 py-2 rounded-xl text-text-secondary hover:text-primary-light hover:bg-primary/10 transition-all font-medium"
             >
               Design Tokens
             </Link>
             <Link
               href="/search"
-              className="text-text-secondary hover:text-primary transition-colors"
+              className="px-4 py-2 rounded-xl text-text-secondary hover:text-primary-light hover:bg-primary/10 transition-all font-medium"
             >
               Search
             </Link>
@@ -75,7 +75,7 @@ export default function Header() {
           {/* Collection Badge */}
           <Link
             href="/collection"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-background-secondary transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl hover:bg-primary/10 transition-all border border-primary/20 hover:border-primary/40"
           >
             <svg
               className="w-5 h-5 text-text-secondary"

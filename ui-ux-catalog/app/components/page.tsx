@@ -35,23 +35,28 @@ export default function ComponentsPage() {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 gradient-bg-radial opacity-30" />
+      <div className="absolute top-40 right-10 w-96 h-96 floating-circle purple animate-float" />
+      <div className="absolute bottom-20 left-10 w-80 h-80 floating-circle pink animate-float-delayed" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold gradient-text mb-4">
-            Component Library
+        <div className="mb-16 text-center">
+          <div className="inline-block mb-4 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+            <span className="text-primary-light text-sm font-medium">{componentsData.length} Components Available</span>
+          </div>
+          <h1 className="text-5xl sm:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-primary-light via-primary to-primary-dark bg-clip-text text-transparent">Component Library</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-3xl">
-            Browse our collection of {componentsData.length} beautiful, reusable UI components. 
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+            Browse our collection of beautiful, reusable UI components. 
             Filter by category and complexity to find exactly what you need.
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-10">
           {/* Sidebar Filters */}
-          <aside className="lg:w-64 flex-shrink-0">
-            <div className="glass-strong rounded-2xl p-6 sticky top-24">
+          <aside className="lg:w-72 flex-shrink-0">
+            <div className="glass-strong rounded-3xl p-7 sticky top-28 shadow-xl border border-primary/10">
               {/* Category Filter */}
               <div className="mb-6">
                 <h3 className="text-sm font-semibold text-text-primary uppercase tracking-wide mb-3">

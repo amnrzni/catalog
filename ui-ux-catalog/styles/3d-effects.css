@@ -6,34 +6,66 @@
   height: 300px;
   border-radius: 50%;
   background: radial-gradient(
-    circle at 30% 30%,
-    rgba(167, 139, 250, 0.9),
-    rgba(139, 92, 246, 0.8) 40%,
-    rgba(124, 58, 237, 0.6) 70%,
-    rgba(88, 28, 135, 0.4)
+    circle at 35% 35%,
+    rgba(196, 181, 253, 1),
+    rgba(167, 139, 250, 0.95) 25%,
+    rgba(139, 92, 246, 0.85) 50%,
+    rgba(124, 58, 237, 0.7) 75%,
+    rgba(88, 28, 135, 0.5)
   );
   box-shadow: 
-    0 20px 60px rgba(139, 92, 246, 0.4),
-    inset -20px -20px 60px rgba(0, 0, 0, 0.3),
-    inset 20px 20px 60px rgba(255, 255, 255, 0.1);
+    0 30px 80px rgba(139, 92, 246, 0.5),
+    0 15px 40px rgba(139, 92, 246, 0.3),
+    inset -30px -30px 80px rgba(0, 0, 0, 0.4),
+    inset 25px 25px 70px rgba(255, 255, 255, 0.15);
   position: relative;
-  animation: float 6s ease-in-out infinite, spin-slow 20s linear infinite;
+  animation: float 6s ease-in-out infinite, spin-slow 20s linear infinite, pulse-glow 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.4));
 }
 
 .sphere-3d::before {
   content: '';
   position: absolute;
-  top: 10%;
-  left: 15%;
-  width: 40%;
-  height: 40%;
+  top: 8%;
+  left: 12%;
+  width: 45%;
+  height: 45%;
   border-radius: 50%;
   background: radial-gradient(
     circle at center,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 80%
+  );
+  filter: blur(25px);
+}
+
+.sphere-3d::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: 10%;
+  width: 80%;
+  height: 40%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(139, 92, 246, 0.4),
     transparent 70%
   );
-  filter: blur(20px);
+  filter: blur(40px);
+  animation: pulse-shadow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-shadow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
 }
 
 /* 3D Torus */

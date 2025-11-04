@@ -26,20 +26,20 @@ export default function Button({
   children,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex items-center justify-center gap-2 rounded-2xl font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed shadow-lg';
 
   const variantStyles = {
-    primary: 'bg-gradient-to-r from-primary to-primary-dark text-white hover:shadow-glow hover:-translate-y-0.5 active:translate-y-0',
-    secondary: 'bg-background-secondary text-text-primary border border-text-quaternary hover:border-primary hover:shadow-md hover:-translate-y-0.5',
-    ghost: 'text-text-primary hover:bg-background-secondary hover:text-primary',
-    danger: 'bg-gradient-to-r from-red-500 to-red-600 text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.5)] hover:-translate-y-0.5',
-    success: 'bg-gradient-to-r from-accent-green to-emerald-600 text-white hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] hover:-translate-y-0.5',
+    primary: 'bg-gradient-to-r from-primary via-primary to-primary-dark text-white hover:shadow-[0_8px_30px_rgba(139,92,246,0.6)] hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100',
+    secondary: 'bg-background-secondary/80 backdrop-blur-sm text-text-primary border-2 border-primary/30 hover:border-primary hover:bg-background-secondary hover:shadow-[0_8px_30px_rgba(139,92,246,0.3)] hover:-translate-y-1',
+    ghost: 'text-text-primary hover:bg-background-secondary/50 hover:text-primary shadow-none',
+    danger: 'bg-gradient-to-r from-red-500 to-red-600 text-white hover:shadow-[0_8px_30px_rgba(239,68,68,0.6)] hover:-translate-y-1',
+    success: 'bg-gradient-to-r from-accent-green to-emerald-600 text-white hover:shadow-[0_8px_30px_rgba(16,185,129,0.6)] hover:-translate-y-1',
   };
 
   const sizeStyles = {
-    small: 'px-3 py-1.5 text-sm',
-    default: 'px-6 py-2.5 text-base',
-    large: 'px-8 py-3.5 text-lg',
+    small: 'px-4 py-2 text-sm',
+    default: 'px-7 py-3 text-base',
+    large: 'px-10 py-4 text-lg',
   };
 
   return (
