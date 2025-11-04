@@ -9,9 +9,10 @@ interface BadgeProps {
   children: React.ReactNode;
   variant?: BadgeVariant;
   className?: string;
+  onClick?: () => void;
 }
 
-export default function Badge({ children, variant = 'default', className }: BadgeProps) {
+export default function Badge({ children, variant = 'default', className, onClick }: BadgeProps) {
   const baseStyles = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
 
   const variantStyles = {
@@ -23,9 +24,14 @@ export default function Badge({ children, variant = 'default', className }: Badg
     default: 'bg-background-tertiary text-text-secondary border border-text-quaternary/30',
   };
 
+  const Component = onClick ? 'button' : 'span';
+
   return (
-    <span className={clsx(baseStyles, variantStyles[variant], className)}>
+    <Component 
+      className={clsx(baseStyles, variantStyles[variant], onClick && 'cursor-pointer hover:opacity-80 transition-opacity', className)}
+      onClick={onClick}
+    >
       {children}
-    </span>
+    </Component>
   );
 }
