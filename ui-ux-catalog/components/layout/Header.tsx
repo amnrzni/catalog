@@ -10,7 +10,14 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Mark as mounted after first render to prevent hydration mismatch
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
+    // Initialize collection count from localStorage
     setCollectionCount(getCollectionCount());
 
     const handleCollectionUpdate = () => {
@@ -19,7 +26,7 @@ export default function Header() {
 
     window.addEventListener('collectionUpdate', handleCollectionUpdate);
     return () => window.removeEventListener('collectionUpdate', handleCollectionUpdate);
-  }, []);
+  }, [mounted]);
 
   if (!mounted) {
     return null; // Prevent hydration mismatch

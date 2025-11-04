@@ -12,6 +12,11 @@ export default function CollectionPage() {
   const [collection, setCollection] = useState<string[]>([]);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  const loadCollection = React.useCallback(() => {
+    const items = getCollection();
+    setCollection(items.map((item) => item.id));
+  }, []);
+
   useEffect(() => {
     loadCollection();
 
@@ -21,12 +26,7 @@ export default function CollectionPage() {
 
     window.addEventListener('collectionUpdate', handleUpdate);
     return () => window.removeEventListener('collectionUpdate', handleUpdate);
-  }, []);
-
-  const loadCollection = () => {
-    const items = getCollection();
-    setCollection(items.map((item) => item.id));
-  };
+  }, [loadCollection]);
 
   const handleRemove = (id: string) => {
     removeFromCollection(id);

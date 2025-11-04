@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
@@ -127,7 +126,7 @@ export default function UseCasesPage() {
                 <svg className="w-6 h-6 text-accent-green" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                Do's
+                Do&apos;s
               </h3>
               <ul className="space-y-3 text-text-secondary">
                 <li className="flex items-start gap-2">
@@ -158,28 +157,28 @@ export default function UseCasesPage() {
                 <svg className="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                 </svg>
-                Don'ts
+                Don&apos;ts
               </h3>
               <ul className="space-y-3 text-text-secondary">
                 <li className="flex items-start gap-2">
                   <span>•</span>
-                  <span>Don't use too many different patterns for similar tasks</span>
+                  <span>Don&apos;t use too many different patterns for similar tasks</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span>•</span>
-                  <span>Don't ignore mobile and responsive considerations</span>
+                  <span>Don&apos;t ignore mobile and responsive considerations</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span>•</span>
-                  <span>Don't overcomplicate simple interactions</span>
+                  <span>Don&apos;t overcomplicate simple interactions</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span>•</span>
-                  <span>Don't sacrifice accessibility for aesthetics</span>
+                  <span>Don&apos;t sacrifice accessibility for aesthetics</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span>•</span>
-                  <span>Don't copy patterns without understanding context</span>
+                  <span>Don&apos;t copy patterns without understanding context</span>
                 </li>
               </ul>
             </Card>

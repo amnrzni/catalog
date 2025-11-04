@@ -57,7 +57,7 @@ export default function SearchPage() {
             {query ? (
               <>
                 Found <strong className="text-text-primary">{results.length}</strong> result
-                {results.length !== 1 ? 's' : ''} for "{query}"
+                {results.length !== 1 ? 's' : ''} for {`"${query}"`}
               </>
             ) : (
               <>

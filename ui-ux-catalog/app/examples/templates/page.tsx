@@ -148,7 +148,7 @@ export default function TemplatesPage() {
                 To use a template in your project:
               </p>
               <ol className="list-decimal list-inside space-y-2 pl-4">
-                <li>Click "Preview" to see the full template in action</li>
+                <li>Click {`"Preview"`} to see the full template in action</li>
                 <li>Review the component structure and code</li>
                 <li>Copy the code to your project</li>
                 <li>Customize the content and styling to match your needs</li>
@@ -157,7 +157,7 @@ export default function TemplatesPage() {
               <div className="mt-6 p-4 rounded-lg bg-background-tertiary/50">
                 <p className="text-sm">
                   <strong className="text-text-primary">Note:</strong> Templates are provided as starting points. 
-                  You'll need to adapt them to your specific requirements and integrate with your backend services.
+                  You&apos;ll need to adapt them to your specific requirements and integrate with your backend services.
                 </p>
               </div>
             </div>

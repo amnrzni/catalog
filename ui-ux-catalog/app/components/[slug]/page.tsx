@@ -35,7 +35,7 @@ export default function ComponentDetailPage({ params }: { params: Promise<{ slug
         <div className="text-center">
           <h1 className="text-4xl font-bold text-text-primary mb-4">Component Not Found</h1>
           <p className="text-text-secondary mb-8">
-            The component you're looking for doesn't exist.
+            The component you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link href="/components">
             <Button variant="primary">Browse Components</Button>
@@ -203,13 +203,13 @@ export default function Example() {
                         <tr className="border-b border-white/5">
                           <td className="p-4 text-text-primary font-mono text-sm">variant</td>
                           <td className="p-4 text-text-tertiary font-mono text-sm">string</td>
-                          <td className="p-4 text-text-tertiary font-mono text-sm">"primary"</td>
+                          <td className="p-4 text-text-tertiary font-mono text-sm">{`"primary"`}</td>
                           <td className="p-4 text-text-tertiary">The visual style variant</td>
                         </tr>
                         <tr className="border-b border-white/5">
                           <td className="p-4 text-text-primary font-mono text-sm">size</td>
                           <td className="p-4 text-text-tertiary font-mono text-sm">string</td>
-                          <td className="p-4 text-text-tertiary font-mono text-sm">"default"</td>
+                          <td className="p-4 text-text-tertiary font-mono text-sm">{`"default"`}</td>
                           <td className="p-4 text-text-tertiary">The size of the component</td>
                         </tr>
                         <tr>
@@ -344,7 +344,7 @@ export default function Example() {
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                       </svg>
                       <div>
-                        <strong className="text-text-primary">Don't:</strong>
+                        <strong className="text-text-primary">Don&apos;t:</strong>
                         <span className="text-text-tertiary ml-2">Overuse primary variants - reserve for key actions</span>
                       </div>
                     </li>
