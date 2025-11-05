@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Catalog — Patterns (All)</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0b0c10;--surface:#101119;--text:#E6E7EC;--muted:#A1A4AD;--border:#232637;--accent:#a78bfa;--radius:16px}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+  a{color:inherit;text-decoration:none}
+  .container{width:min(1100px,92vw);margin-inline:auto}
+  header{position:sticky;top:0;z-index:20;background:rgba(10,11,16,.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;color:var(--muted)}
+  h1{margin:34px 0 10px;font-weight:800;font-size:clamp(36px,5.6vw,54px)}
+  .lead{color:var(--muted);margin:0 0 20px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 40%);border:1px solid var(--border);border-radius:16px;padding:16px}
+  .card h3{margin:0 0 6px} .card p{margin:0;color:var(--muted)}
+  @media (max-width: 1000px){.grid{grid-template-columns:repeat(2,1fr)}} @media (max-width: 640px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div>Catalog</div>
+      <div style="display:flex;gap:1rem">
+        <a href="home.html">Home</a>
+        <a href="library.html">Components</a>
+        <a href="animations.html">Animations</a>
+        <a href="use-cases.html">Use cases</a>
+        <a href="tokens.html">Tokens</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Patterns — All</h1>
+  <p class="lead">Composed flows built from components. Each card links to a detailed recipe with a11y and motion guidelines.</p>
+  <div class="grid">
+    <a class="card" href="#"><h3>Auth</h3><p>Sign in/up, magic link, 2FA, reset password</p></a>
+    <a class="card" href="#"><h3>Onboarding</h3><p>Checklist, progressive disclosure, coach marks</p></a>
+    <a class="card" href="#"><h3>Settings</h3><p>Tabbed layout, account & billing, API keys</p></a>
+    <a class="card" href="#"><h3>Search</h3><p>Facets, sort, saved views, URL params</p></a>
+    <a class="card" href="#"><h3>Table CRUD</h3><p>Inline edit, optimistic updates, bulk actions</p></a>
+    <a class="card" href="#"><h3>Content editor</h3><p>MDX with preview, file uploads, versioning</p></a>
+    <a class="card" href="#"><h3>Notifications</h3><p>Inbox + toasts, read states, activity feed</p></a>
+    <a class="card" href="#"><h3>Payments</h3><p>Checkout, subscriptions, invoices</p></a>
+    <a class="card" href="#"><h3>Docs layout</h3><p>Sticky TOC, code switcher, next/prev</p></a>
+    <a class="card" href="#"><h3>Dashboard</h3><p>KPI cards, filters, resizable panels</p></a>
+    <a class="card" href="#"><h3>File manager</h3><p>Grid/list, selection, preview, rename</p></a>
+    <a class="card" href="#"><h3>Messaging</h3><p>Chat composer, threads, presence</p></a>
+  </div>
+</main>
+</body>
+</html>
