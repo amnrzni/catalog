@@ -32,7 +32,9 @@ export default function Pill({ children, active = false, onClick, className = ""
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
       onKeyDown={onClick ? (e) => {
-        if (e.key === "Enter" || e.key === " ") {
+        if (e.key === "Enter") {
+          onClick();
+        } else if (e.key === " ") {
           e.preventDefault();
           onClick();
         }

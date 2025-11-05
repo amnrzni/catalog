@@ -41,13 +41,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     setMounted(true);
     
-    const savedAccent = localStorage.getItem("catalog-accent") as AccentColor;
-    const savedFocus = localStorage.getItem("catalog-focus") as FocusStyle;
-    const savedMotion = localStorage.getItem("catalog-motion") as MotionMode;
-    const savedContrast = localStorage.getItem("catalog-contrast") as ContrastMode;
+    if (typeof window === "undefined") return;
+    
+    const savedAccent = localStorage.getItem("catalog-accent");
+    const savedFocus = localStorage.getItem("catalog-focus");
+    const savedMotion = localStorage.getItem("catalog-motion");
+    const savedContrast = localStorage.getItem("catalog-contrast");
 
-    if (savedAccent && ACCENT_MAP[savedAccent]) {
-      setAccentState(savedAccent);
+    if (savedAccent && savedAccent in ACCENT_MAP) {
+      setAccentState(savedAccent as AccentColor);
     }
     if (savedFocus === "ring" || savedFocus === "outline") {
       setFocusState(savedFocus);
