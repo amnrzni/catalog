@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { getCollection, removeFromCollection, clearCollection } from '@/lib/collection-storage';
 import { getComponentById } from '@/lib/components-data';
@@ -8,25 +8,33 @@ import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 
+// Subscribe function for collection updates
+function subscribe(callback: () => void) {
+  window.addEventListener('collectionUpdate', callback);
+  return () => window.removeEventListener('collectionUpdate', callback);
+}
+
+// Get current collection
+function getSnapshot() {
+  if (typeof window === 'undefined') return [];
+  const items = getCollection();
+  return items.map((item) => item.id);
+}
+
+// Server-side snapshot (always empty)
+function getServerSnapshot() {
+  return [];
+}
+
 export default function CollectionPage() {
-  const [collection, setCollection] = useState<string[]>([]);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const loadCollection = React.useCallback(() => {
-    const items = getCollection();
-    setCollection(items.map((item) => item.id));
-  }, []);
-
-  useEffect(() => {
-    loadCollection();
-
-    const handleUpdate = () => {
-      loadCollection();
-    };
-
-    window.addEventListener('collectionUpdate', handleUpdate);
-    return () => window.removeEventListener('collectionUpdate', handleUpdate);
-  }, [loadCollection]);
+  // Use useSyncExternalStore to sync with localStorage
+  const collection = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
 
   const handleRemove = (id: string) => {
     removeFromCollection(id);

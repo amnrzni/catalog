@@ -52,13 +52,13 @@ export default function Home() {
   return (
     <div className="relative overflow-hidden min-h-screen">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 gradient-bg-animated opacity-40" />
+      <div className="absolute inset-0 gradient-bg-animated opacity-40" aria-hidden="true" />
       
       {/* Floating decorative elements */}
-      <div className="absolute top-20 left-10 w-40 h-40 floating-circle purple animate-float" />
-      <div className="absolute bottom-40 right-20 w-48 h-48 floating-circle pink animate-float-delayed" />
-      <div className="absolute top-1/2 right-10 w-32 h-32 floating-circle blue animate-float" />
-      <div className="absolute top-1/3 left-1/4 w-36 h-36 floating-circle purple animate-float-delayed" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-20 left-10 w-40 h-40 floating-circle purple animate-float" aria-hidden="true" />
+      <div className="absolute bottom-40 right-20 w-48 h-48 floating-circle pink animate-float-delayed" aria-hidden="true" />
+      <div className="absolute top-1/2 right-10 w-32 h-32 floating-circle blue animate-float" aria-hidden="true" />
+      <div className="absolute top-1/3 left-1/4 w-36 h-36 floating-circle purple animate-float-delayed" style={{ animationDelay: '1s' }} aria-hidden="true" />
 
       {/* Hero Section */}
       <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">

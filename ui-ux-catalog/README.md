@@ -130,12 +130,55 @@ All design tokens are centralized in:
 
 ## 🧪 Tech Stack
 
-- **Framework**: Next.js 14+ (App Router)
+- **Framework**: Next.js 16+ (App Router)
 - **Language**: TypeScript (strict mode)
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS 4
 - **Animations**: Framer Motion (ready)
 - **Code Highlighting**: React Syntax Highlighter
 - **Icons**: Lucide Icons (via CDN)
+
+## 🚀 Deploy to Vercel
+
+The easiest way to deploy this catalog is using Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/amnrzni/catalog)
+
+### Manual Deployment
+
+1. Install the Vercel CLI:
+   ```bash
+   npm install -g vercel
+   ```
+
+2. Deploy:
+   ```bash
+   cd ui-ux-catalog
+   vercel
+   ```
+
+3. Follow the prompts to link your project
+
+### Environment Variables
+
+This project currently requires no environment variables. If you add analytics or API integrations, copy `.env.example` to `.env.local` and fill in your values.
+
+### Build Configuration
+
+- **Build Command**: `npm run build`
+- **Output Directory**: `.next`
+- **Install Command**: `npm install`
+- **Node Version**: 20.x or higher
+- **Framework**: Next.js (auto-detected)
+
+### Post-Deployment Checklist
+
+After deploying, verify:
+- [ ] All pages load correctly
+- [ ] Navigation works
+- [ ] Component filtering functions
+- [ ] Collection manager works
+- [ ] Search functionality operational
+- [ ] No console errors
 
 ## 📝 License
 
