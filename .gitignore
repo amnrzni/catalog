@@ -1,0 +1,11 @@
+# Root level gitignore
+# The main project is in ui-ux-catalog/ with its own .gitignore
+
+# Root package-lock.json (workspace manages dependencies)
+package-lock.json
+
+# Node modules at root (workspace manages dependencies)
+node_modules/
+
+# Vercel
+.vercel
