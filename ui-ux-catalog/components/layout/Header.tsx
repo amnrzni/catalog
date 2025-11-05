@@ -1,101 +1,83 @@
-'use client';
+"use client";
 
-import React, { useSyncExternalStore } from 'react';
-import Link from 'next/link';
-import { getCollectionCount } from '@/lib/collection-storage';
-import Badge from '@/components/ui/Badge';
-
-// Subscribe function for collection updates
-function subscribe(callback: () => void) {
-  window.addEventListener('collectionUpdate', callback);
-  return () => window.removeEventListener('collectionUpdate', callback);
-}
-
-// Get current collection count
-function getSnapshot() {
-  return typeof window !== 'undefined' ? getCollectionCount() : 0;
-}
-
-// Server-side snapshot (always 0)
-function getServerSnapshot() {
-  return 0;
-}
+import Link from "next/link";
 
 export default function Header() {
-  // Use useSyncExternalStore to sync with localStorage
-  const collectionCount = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot
-  );
-
   return (
-    <header role="banner" className="sticky top-0 z-50 glass-strong border-b border-primary/10 shadow-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group" aria-label="UI/UX Catalog Home">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-primary to-primary-dark flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-              <span className="text-white font-bold text-xl" aria-hidden="true">U</span>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary-light via-primary to-primary-dark bg-clip-text text-transparent">UI/UX Catalog</span>
+    <header className="sticky top-0 z-20" style={{ 
+      background: "rgba(11, 12, 16, 0.6)", 
+      backdropFilter: "saturate(140%) blur(10px)",
+      borderBottom: "1px solid var(--border)"
+    }}>
+      <div className="container">
+        <nav className="flex items-center justify-between" style={{ padding: "0.8rem 0" }}>
+          {/* Brand */}
+          <Link href="/" className="flex items-center gap-2 font-extrabold" style={{ fontSize: "16px" }}>
+            <span 
+              className="dot" 
+              style={{ 
+                width: "20px", 
+                height: "20px", 
+                borderRadius: "6px", 
+                background: "var(--accent)" 
+              }}
+            />
+            Catalog
           </Link>
 
-          {/* Navigation */}
-          <nav role="navigation" aria-label="Main navigation" className="hidden md:flex items-center gap-2">
-            <Link
-              href="/components"
-              className="px-4 py-2 rounded-xl text-text-secondary hover:text-primary-light hover:bg-primary/10 transition-all font-medium"
-            >
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center gap-4" style={{ color: "var(--muted)", fontSize: "14px" }}>
+            <Link href="/" className="hover-text">
+              Home
+            </Link>
+            <Link href="/library" className="hover-text">
               Components
             </Link>
-            <Link
-              href="/use-cases"
-              className="px-4 py-2 rounded-xl text-text-secondary hover:text-primary-light hover:bg-primary/10 transition-all font-medium"
-            >
-              Use Cases
+            <Link href="/patterns" className="hover-text">
+              Patterns
             </Link>
-            <Link
-              href="/design-tokens"
-              className="px-4 py-2 rounded-xl text-text-secondary hover:text-primary-light hover:bg-primary/10 transition-all font-medium"
-            >
-              Design Tokens
+            <Link href="/animations" className="hover-text">
+              Animations
             </Link>
-            <Link
-              href="/search"
-              className="px-4 py-2 rounded-xl text-text-secondary hover:text-primary-light hover:bg-primary/10 transition-all font-medium"
-            >
-              Search
+            <Link href="/use-cases" className="hover-text">
+              Use cases
             </Link>
-          </nav>
+            <Link href="/tokens" className="hover-text">
+              Tokens
+            </Link>
+          </div>
 
-          {/* Collection Badge */}
+          {/* Primary CTA */}
           <Link
-            href="/collection"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl hover:bg-primary/10 transition-all border border-primary/20 hover:border-primary/40"
-            aria-label={`View collection${collectionCount > 0 ? ` (${collectionCount} items)` : ''}`}
+            href="/library"
+            className="btn-primary"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.75rem 1rem",
+              borderRadius: "999px",
+              border: "1px solid transparent",
+              fontWeight: 600,
+              background: "var(--accent)",
+              color: "var(--bg)",
+              transition: "all 0.2s ease"
+            }}
           >
-            <svg
-              className="w-5 h-5 text-text-secondary"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
-            </svg>
-            <span className="sr-only">Collection</span>
-            {collectionCount > 0 && (
-              <Badge variant="primary" aria-label={`${collectionCount} items in collection`}>{collectionCount}</Badge>
-            )}
+            Get started
           </Link>
-        </div>
+        </nav>
       </div>
+
+      <style jsx>{`
+        .hover-text:hover {
+          color: var(--text);
+        }
+        .btn-primary:hover {
+          filter: brightness(1.05);
+          transform: translateY(-1px);
+        }
+      `}</style>
     </header>
   );
 }

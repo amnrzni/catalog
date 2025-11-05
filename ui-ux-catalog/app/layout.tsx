@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "../styles/animations.css";
-import "../styles/3d-effects.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -110,9 +110,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/lucide-static@0.294.0/font/lucide.min.css"
         />
         <link rel="manifest" href="/site.webmanifest" />
         <script
@@ -134,18 +135,21 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        {/* Skip to main content link for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-primary focus:text-white focus:rounded-xl focus:shadow-glow"
-        >
-          Skip to main content
-        </a>
-        <Header />
-        <main id="main-content" className="min-h-screen" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider>
+          {/* Skip to main content link for accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:rounded-xl"
+            style={{ background: "var(--accent)", color: "var(--bg)" }}
+          >
+            Skip to main content
+          </a>
+          <Header />
+          <main id="main-content" className="min-h-screen" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
