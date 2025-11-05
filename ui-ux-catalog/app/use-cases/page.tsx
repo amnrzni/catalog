@@ -1,190 +1,352 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
-import Button from '@/components/ui/Button';
+import { useState } from "react";
+import Panel from "@/components/ui/Panel";
 
 export default function UseCasesPage() {
-  const useCases = [
-    {
-      id: 'form-submission',
-      title: 'Form Submission Flows',
-      description: 'Complete patterns for handling user input, validation, and submission feedback.',
-      components: ['Button', 'Text Input', 'Dropdown', 'Checkbox'],
-      icon: 'file-edit',
-      gradient: 'from-primary to-primary-dark',
-    },
-    {
-      id: 'data-display',
-      title: 'Data Display Patterns',
-      description: 'Effective ways to present information, statistics, and data visualizations.',
-      components: ['Card', 'Data Chart', 'Badge', 'Table'],
-      icon: 'bar-chart-2',
-      gradient: 'from-accent-blue to-blue-600',
-    },
-    {
-      id: 'user-feedback',
-      title: 'User Feedback Scenarios',
-      description: 'Patterns for communicating success, errors, warnings, and loading states.',
-      components: ['Modal', 'Loading Spinner', 'Badge', 'Button'],
-      icon: 'message-circle',
-      gradient: 'from-accent-green to-emerald-600',
-    },
-    {
-      id: 'navigation',
-      title: 'Navigation Patterns',
-      description: 'Intuitive navigation structures for guiding users through your application.',
-      components: ['Navigation Menu', 'Button', 'Badge'],
-      icon: 'compass',
-      gradient: 'from-accent-pink to-pink-600',
-    },
-    {
-      id: 'onboarding',
-      title: 'Onboarding Flows',
-      description: 'Step-by-step patterns for introducing users to your product features.',
-      components: ['Modal', 'Button', 'Card'],
-      icon: 'user-plus',
-      gradient: 'from-accent-orange to-orange-600',
-    },
-    {
-      id: 'search-filter',
-      title: 'Search & Filter',
-      description: 'Patterns for helping users find and filter content efficiently.',
-      components: ['Text Input', 'Dropdown', 'Badge', 'Button'],
-      icon: 'filter',
-      gradient: 'from-purple-500 to-indigo-600',
-    },
-  ];
+  const [bannerVisible, setBannerVisible] = useState(true);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
+
+  const handleDismiss = () => {
+    setBannerVisible(false);
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 3000);
+  };
+
+  const handleRestore = () => {
+    setBannerVisible(true);
+    setToastVisible(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormMessage("✓ Account created successfully!");
+  };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 gradient-bg-radial opacity-30" />
+    <main className="container" style={{ paddingBottom: "80px" }}>
+      <h1
+        style={{
+          margin: "34px 0 10px",
+          fontWeight: 800,
+          fontSize: "clamp(36px, 5.6vw, 54px)",
+        }}
+      >
+        Use cases
+      </h1>
+      <p className="lead" style={{ color: "var(--muted)", margin: "0 0 20px" }}>
+        Concrete scenarios that combine components, patterns, motion, and tokens.
+      </p>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold gradient-text mb-4">
-            Use Cases
-          </h1>
-          <p className="text-xl text-text-secondary max-w-3xl">
-            Discover real-world applications and implementation patterns for common design scenarios.
-            Each use case shows recommended components and best practices.
-          </p>
-        </div>
-
-        {/* Use Cases Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {useCases.map((useCase) => (
-            <Card key={useCase.id} hover glassmorphism className="h-full">
-              <div className="flex flex-col h-full">
-                {/* Icon */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${useCase.gradient} flex items-center justify-center mb-4`}>
-                  <i className={`lucide-${useCase.icon} text-white text-2xl`} />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-text-primary mb-3">
-                  {useCase.title}
-                </h3>
-                <p className="text-text-tertiary mb-4 flex-1">
-                  {useCase.description}
-                </p>
-
-                {/* Components */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-text-secondary mb-2">
-                    Recommended Components:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {useCase.components.map((component) => (
-                      <Badge key={component} variant="default">
-                        {component}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Action */}
-                <Button variant="secondary" size="small" fullWidth>
-                  View Pattern
-                </Button>
+      {/* Announcements */}
+      <section
+        id="announcements"
+        style={{
+          padding: "36px 0",
+          borderTop: "1px solid color-mix(in oklab, var(--border), transparent 30%)",
+        }}
+      >
+        <h2 style={{ margin: "0 0 12px" }}>Announcements</h2>
+        <Panel>
+          {bannerVisible && (
+            <div
+              id="banner"
+              style={{
+                border: "1px dashed var(--border)",
+                borderRadius: "12px",
+                padding: "12px",
+                background: "rgba(255, 255, 255, 0.03)",
+                display: "flex",
+                gap: "10px",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+              }}
+            >
+              <div>
+                <strong>New components!</strong> Data Table, Drawer, Spotlight.
               </div>
-            </Card>
-          ))}
-        </div>
-
-        {/* Best Practices Section */}
-        <section className="mt-16">
-          <h2 className="text-3xl font-bold text-text-primary mb-6">
-            Implementation Best Practices
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card glassmorphism padding="large">
-              <h3 className="text-xl font-semibold text-text-primary mb-4 flex items-center gap-2">
-                <svg className="w-6 h-6 text-accent-green" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                Do&apos;s
-              </h3>
-              <ul className="space-y-3 text-text-secondary">
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Use consistent patterns across similar use cases</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Provide clear feedback for user actions</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Test patterns with real users for usability</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Consider accessibility in all implementations</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Adapt patterns to your specific context</span>
-                </li>
-              </ul>
-            </Card>
-
-            <Card glassmorphism padding="large">
-              <h3 className="text-xl font-semibold text-text-primary mb-4 flex items-center gap-2">
-                <svg className="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                </svg>
-                Don&apos;ts
-              </h3>
-              <ul className="space-y-3 text-text-secondary">
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Don&apos;t use too many different patterns for similar tasks</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Don&apos;t ignore mobile and responsive considerations</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Don&apos;t overcomplicate simple interactions</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Don&apos;t sacrifice accessibility for aesthetics</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span>•</span>
-                  <span>Don&apos;t copy patterns without understanding context</span>
-                </li>
-              </ul>
-            </Card>
+              <div style={{ display: "flex", gap: "8px" }}>
+                <a
+                  href="/library"
+                  className="btn"
+                  style={{
+                    padding: "0.6rem 0.9rem",
+                    borderRadius: "999px",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    background: "transparent",
+                    color: "var(--text)",
+                  }}
+                >
+                  View
+                </a>
+                <button
+                  onClick={handleDismiss}
+                  className="btn"
+                  style={{
+                    padding: "0.6rem 0.9rem",
+                    borderRadius: "999px",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    background: "transparent",
+                    color: "var(--text)",
+                    cursor: "pointer",
+                  }}
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          )}
+          <div
+            id="toast"
+            style={{
+              opacity: toastVisible ? 1 : 0,
+              transform: toastVisible ? "none" : "translateY(6px)",
+              transition: "0.25s ease",
+              marginTop: "10px",
+              color: "var(--muted)",
+              fontSize: "13px",
+            }}
+          >
+            Dismissed. You can restore it.
           </div>
-        </section>
-      </div>
-    </div>
+          <button
+            onClick={handleRestore}
+            className="btn"
+            style={{
+              marginTop: "8px",
+              padding: "0.6rem 0.9rem",
+              borderRadius: "999px",
+              border: "1px solid rgba(255, 255, 255, 0.08)",
+              background: "transparent",
+              color: "var(--text)",
+              cursor: "pointer",
+            }}
+          >
+            Restore banner
+          </button>
+        </Panel>
+      </section>
+
+      {/* Forms */}
+      <section id="forms" style={{ padding: "36px 0" }}>
+        <h2 style={{ margin: "0 0 12px" }}>Forms</h2>
+        <div
+          className="grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "18px",
+          }}
+        >
+          <Panel>
+            <h3 style={{ margin: "0 0 10px" }}>Sign up</h3>
+            <form onSubmit={handleSubmit} style={{ display: "grid", gap: "10px" }}>
+              <input
+                id="email"
+                placeholder="Email"
+                type="email"
+                required
+                style={{
+                  width: "100%",
+                  padding: "0.7rem 0.9rem",
+                  borderRadius: "12px",
+                  border: "1px solid var(--border)",
+                  background: "#0f1117",
+                  color: "var(--text)",
+                }}
+              />
+              <div style={{ position: "relative" }}>
+                <input
+                  id="password"
+                  placeholder="Password"
+                  type={passwordVisible ? "text" : "password"}
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "0.7rem 0.9rem",
+                    borderRadius: "12px",
+                    border: "1px solid var(--border)",
+                    background: "#0f1117",
+                    color: "var(--text)",
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  className="btn"
+                  style={{
+                    position: "absolute",
+                    right: "6px",
+                    top: "6px",
+                    padding: "0.4rem 0.6rem",
+                    borderRadius: "999px",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    background: "transparent",
+                    color: "var(--text)",
+                    cursor: "pointer",
+                    fontSize: "13px",
+                  }}
+                >
+                  {passwordVisible ? "Hide" : "Show"}
+                </button>
+              </div>
+              <button
+                type="submit"
+                className="btn-primary"
+                style={{
+                  padding: "0.6rem 0.9rem",
+                  borderRadius: "999px",
+                  background: "var(--accent)",
+                  border: "none",
+                  color: "var(--bg)",
+                  cursor: "pointer",
+                  fontWeight: 600,
+                }}
+              >
+                Create account
+              </button>
+              {formMessage && (
+                <div style={{ color: "var(--muted)", fontSize: "13px" }}>{formMessage}</div>
+              )}
+            </form>
+          </Panel>
+          <Panel>
+            <h3 style={{ margin: "0 0 10px" }}>Progress save</h3>
+            <p style={{ color: "var(--muted)", fontSize: "13px" }}>No changes.</p>
+          </Panel>
+        </div>
+      </section>
+
+      {/* Dashboard */}
+      <section id="dashboard" style={{ padding: "36px 0" }}>
+        <h2 style={{ margin: "0 0 12px" }}>Dashboard</h2>
+        <Panel>
+          <div
+            className="kpis"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+              gap: "12px",
+            }}
+          >
+            {[
+              { label: "Revenue", value: "$32k" },
+              { label: "Users", value: "8.1k" },
+              { label: "Conversion", value: "3.2%" },
+              { label: "NPS", value: "62" },
+            ].map((kpi, i) => (
+              <div
+                key={i}
+                className="kpi"
+                style={{
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "12px",
+                  padding: "12px",
+                }}
+              >
+                <div style={{ color: "var(--muted)", fontSize: "13px" }}>{kpi.label}</div>
+                <div style={{ fontWeight: 800, fontSize: "22px" }}>{kpi.value}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: "20px" }}>
+            <h4 style={{ margin: "0 0 8px" }}>Recent activity</h4>
+            <div
+              className="code"
+              style={{
+                fontFamily: "ui-monospace, Menlo, Consolas, monospace",
+                background: "#0f1015",
+                border: "1px solid var(--border)",
+                borderRadius: "12px",
+                padding: "12px",
+                fontSize: "13px",
+                color: "var(--muted)",
+              }}
+            >
+              <div>12:45 — User signed up</div>
+              <div>12:40 — Export completed</div>
+              <div>12:35 — Settings updated</div>
+            </div>
+          </div>
+        </Panel>
+      </section>
+
+      {/* Docs */}
+      <section id="docs" style={{ padding: "36px 0" }}>
+        <h2 style={{ margin: "0 0 12px" }}>Docs</h2>
+        <div className="grid" style={{ display: "grid", gridTemplateColumns: "3fr 1fr", gap: "18px" }}>
+          <Panel>
+            <h3 style={{ margin: "0 0 10px" }}>Getting started</h3>
+            <p style={{ color: "var(--muted)", lineHeight: 1.7 }}>
+              Install the package and import components. Each component is tree-shakeable and comes with TypeScript
+              definitions.
+            </p>
+            <div
+              className="code"
+              style={{
+                fontFamily: "ui-monospace, Menlo, Consolas, monospace",
+                background: "#0f1015",
+                border: "1px solid var(--border)",
+                borderRadius: "12px",
+                padding: "12px",
+                fontSize: "13px",
+                marginTop: "12px",
+              }}
+            >
+              npm install @catalog/ui
+            </div>
+            <div
+              style={{
+                marginTop: "16px",
+                padding: "12px",
+                background: "rgba(255, 255, 255, 0.03)",
+                border: "1px solid var(--border)",
+                borderRadius: "12px",
+              }}
+            >
+              <strong>💡 Tip:</strong> Use the accent switcher to preview different color schemes.
+            </div>
+          </Panel>
+          <div style={{ position: "sticky", top: "70px" }}>
+            <Panel>
+              <h4 style={{ margin: "0 0 8px", fontSize: "14px" }}>On this page</h4>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                {["Installation", "Usage", "Examples", "API"].map((item, i) => (
+                  <li
+                    key={i}
+                    style={{
+                      padding: "4px 0",
+                      fontSize: "13px",
+                      color: i === 0 ? "var(--accent)" : "var(--muted)",
+                    }}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+          </div>
+        </div>
+      </section>
+
+      <style jsx>{`
+        .btn:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        .btn-primary:hover {
+          filter: brightness(1.05);
+          transform: translateY(-1px);
+        }
+        @media (max-width: 1000px) {
+          .grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </main>
   );
 }
