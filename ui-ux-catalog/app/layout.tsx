@@ -1,11 +1,22 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "../styles/animations.css";
 import "../styles/3d-effects.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#0f1729' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://ui-ux-catalog.vercel.app'),
   title: {
     default: "UI/UX Design Catalog - Modern Component Library",
     template: "%s | UI/UX Catalog",
@@ -29,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "UI/UX Design Catalog",
     description: "Modern component library with dark theme and glassmorphism effects",
-    url: "https://catalog.vercel.app",
+    url: "https://ui-ux-catalog.vercel.app",
     siteName: "UI/UX Catalog",
     images: [
       {
@@ -74,12 +85,16 @@ export const metadata: Metadata = {
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/safari-pinned-tab.svg',
+        color: '#8b5cf6',
+      },
+    ],
   },
   
-  // Theme color
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#0f1729' },
-  ],
+  manifest: '/site.webmanifest',
   
   // Additional metadata
   category: 'technology',
@@ -99,6 +114,7 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/lucide-static@0.294.0/font/lucide.min.css"
         />
+        <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -107,10 +123,10 @@ export default function RootLayout({
               "@type": "WebSite",
               "name": "UI/UX Design Catalog",
               "description": "Modern component library and design system",
-              "url": "https://catalog.vercel.app",
+              "url": process.env.NEXT_PUBLIC_SITE_URL || "https://ui-ux-catalog.vercel.app",
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://catalog.vercel.app/search?q={search_term_string}",
+                "target": `${process.env.NEXT_PUBLIC_SITE_URL || "https://ui-ux-catalog.vercel.app"}/search?q={search_term_string}`,
                 "query-input": "required name=search_term_string"
               }
             })

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { componentsData } from '@/lib/components-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://catalog.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ui-ux-catalog.vercel.app';
 
   // Static pages
   const staticPages = [

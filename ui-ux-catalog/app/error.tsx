@@ -28,7 +28,7 @@ export default function Error({
           Something Went Wrong
         </h1>
         <p className="text-xl text-text-secondary mb-4">
-          We're sorry, but something unexpected happened.
+          We&apos;re sorry, but something unexpected happened.
         </p>
         
         {/* Error Details (dev mode only) */}
