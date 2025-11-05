@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Catalog — Design Tokens & Accessibility Presets</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0c10;--surface:#111218;--surface-2:#151823;--text:#E6E7EC;--muted:#A1A4AD;--border:#232637;--accent:#a78bfa;--radius:14px;
+    --accent-purple:#a78bfa; --accent-blue:#60a5fa; --accent-teal:#22d3ee; --accent-pink:#fb5fb1; --accent-yellow:#ffd60a; --accent-orange:#ff8c3a; --accent-lime:#84cc16;
+    --focus: ring; /* ring | outline */
+    --motion: base; /* base | reduced */
+    --contrast: normal; /* normal | high */
+  }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+  .container{width:min(1100px,92vw);margin-inline:auto}
+  header{position:sticky;top:0;z-index:20;background:rgba(10,11,16,.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;color:var(--muted)}
+  a{color:inherit;text-decoration:none}
+  h1{margin:36px 0 8px;font-size:clamp(34px,5.4vw,54px);font-weight:800;letter-spacing:-.02em}
+  .lead{color:var(--muted);margin:0 0 14px}
+  .controls{display:flex;gap:.6rem;flex-wrap:wrap;margin:8px 0 16px}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .7rem;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.04);color:var(--muted);font-size:13px;cursor:pointer}
+  .sw{width:14px;height:14px;border-radius:50%}
+  .tabs{position:sticky;top:56px;background:rgba(11,12,16,.7);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10}
+  .tabs-inner{display:flex;gap:.6rem;align-items:center;height:48px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .token{display:flex;gap:12px;align-items:center;border:1px solid var(--border);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 40%);border-radius:var(--radius);padding:12px}
+  .swatch{width:60px;height:60px;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+  .copy{margin-left:auto;border:1px solid var(--border);background:transparent;border-radius:999px;color:var(--muted);padding:.35rem .6rem;font-weight:600}
+  .copy:hover{background:rgba(255,255,255,.06);color:var(--text)}
+  small{color:var(--muted)} section{padding:24px 0}
+  /* Accessibility presets effects */
+  [data-contrast="high"]{--text:#FFFFFF; --muted:#C6C8D1; --border:#3c3f52}
+  [data-contrast="high"] .token{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 30%)}
+  [data-focus="outline"] :focus-visible{outline:2px solid var(--accent); outline-offset:2px; box-shadow:none!important}
+  [data-focus="ring"] :focus-visible{outline:none; box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 40%, transparent)}
+  [data-motion="reduced"] *{animation:none!important; transition:none!important}
+  input,button,select{font:inherit;color:inherit}
+  @media (max-width: 900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-focus="ring" data-motion="base" data-contrast="normal">
+<header>
+  <div class="container">
+    <nav>
+      <div>Catalog</div>
+      <div style="display:flex;gap:1rem">
+        <a href="home.html">Home</a>
+        <a href="library.html">Components</a>
+        <a href="patterns.html">Patterns</a>
+        <a href="animations.html">Animations</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Design tokens</h1>
+  <p class="lead">Expanded tokens with live accessibility presets. Switch accent, focus style, motion, and contrast to preview how the system adapts.</p>
+
+  <div class="controls">
+    <!-- Accent palette -->
+    <span class="pill" data-accent="purple"><span class="sw" style="background:var(--accent-purple)"></span>Purple</span>
+    <span class="pill" data-accent="blue"><span class="sw" style="background:var(--accent-blue)"></span>Blue</span>
+    <span class="pill" data-accent="teal"><span class="sw" style="background:var(--accent-teal)"></span>Teal</span>
+    <span class="pill" data-accent="pink"><span class="sw" style="background:var(--accent-pink)"></span>Pink</span>
+    <span class="pill" data-accent="yellow"><span class="sw" style="background:var(--accent-yellow)"></span>Yellow</span>
+    <span class="pill" data-accent="orange"><span class="sw" style="background:var(--accent-orange)"></span>Orange</span>
+    <span class="pill" data-accent="lime"><span class="sw" style="background:var(--accent-lime)"></span>Lime</span>
+  </div>
+  <div class="controls">
+    <!-- Accessibility presets -->
+    <span class="pill" data-focus="ring">Focus: Ring</span>
+    <span class="pill" data-focus="outline">Focus: Outline</span>
+    <span class="pill" data-motion="base">Motion: Base</span>
+    <span class="pill" data-motion="reduced">Motion: Reduced</span>
+    <span class="pill" data-contrast="normal">Contrast: Normal</span>
+    <span class="pill" data-contrast="high">Contrast: High</span>
+  </div>
+
+  <div class="tabs"><div class="container tabs-inner">
+    <span class="pill">Colors</span><span class="pill">Spacing</span><span class="pill">Radii</span><span class="pill">Shadows</span><span class="pill">Borders</span><span class="pill">Opacity</span><span class="pill">Z‑index</span><span class="pill">Motion</span>
+  </div></div>
+
+  <!-- Colors -->
+  <section id="colors">
+    <h2 style="font-size:20px;margin:12px 0">Colors</h2>
+    <div class="grid">
+      <div class="token"><div class="swatch" style="background:#0f1117"></div><div><strong>bg.primary</strong><br><small>#0f1117</small></div><button class="copy" data-value="#0f1117">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#151823"></div><div><strong>bg.surface</strong><br><small>#151823</small></div><button class="copy" data-value="#151823">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:var(--accent)"></div><div><strong>accent</strong><br><small>var(--accent)</small></div><button class="copy" data-value="var(--accent)">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#e6e7ec"></div><div><strong>text</strong><br><small>#e6e7ec</small></div><button class="copy" data-value="#e6e7ec">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#9ca3af"></div><div><strong>muted</strong><br><small>#9ca3af</small></div><button class="copy" data-value="#9ca3af">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#232637"></div><div><strong>border</strong><br><small>#232637</small></div><button class="copy" data-value="#232637">Copy</button></div>
+    </div>
+  </section>
+
+  <!-- Spacing -->
+  <section id="spacing">
+    <h2 style="font-size:20px;margin:12px 0">Spacing</h2>
+    <div class="grid">
+      <div class="token"><div class="swatch" style="background:linear-gradient(90deg,var(--accent) 30%,transparent 0);background-size:12px 60px"></div><div><strong>space.1</strong><br><small>4px</small></div><button class="copy" data-value="4px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:linear-gradient(90deg,var(--accent) 50%,transparent 0);background-size:20px 60px"></div><div><strong>space.2</strong><br><small>8px</small></div><button class="copy" data-value="8px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:linear-gradient(90deg,var(--accent) 75%,transparent 0);background-size:30px 60px"></div><div><strong>space.3</strong><br><small>12px</small></div><button class="copy" data-value="12px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:linear-gradient(90deg,var(--accent) 100%,transparent 0);background-size:40px 60px"></div><div><strong>space.4</strong><br><small>16px</small></div><button class="copy" data-value="16px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:linear-gradient(90deg,var(--accent) 140%,transparent 0);background-size:56px 60px"></div><div><strong>space.6</strong><br><small>24px</small></div><button class="copy" data-value="24px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:linear-gradient(90deg,var(--accent) 200%,transparent 0);background-size:80px 60px"></div><div><strong>space.8</strong><br><small>32px</small></div><button class="copy" data-value="32px">Copy</button></div>
+    </div>
+  </section>
+
+  <!-- Radii -->
+  <section id="radii">
+    <h2 style="font-size:20px;margin:12px 0">Radii</h2>
+    <div class="grid">
+      <div class="token"><div class="swatch" style="background:#0f1117;border-radius:4px"></div><div><strong>radius.1</strong><br><small>4px</small></div><button class="copy" data-value="4px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#0f1117;border-radius:10px"></div><div><strong>radius.2</strong><br><small>10px</small></div><button class="copy" data-value="10px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#0f1117;border-radius:16px"></div><div><strong>radius.3</strong><br><small>16px</small></div><button class="copy" data-value="16px">Copy</button></div>
+    </div>
+  </section>
+
+  <!-- Shadows -->
+  <section id="shadows">
+    <h2 style="font-size:20px;margin:12px 0">Shadows</h2>
+    <div class="grid">
+      <div class="token"><div class="swatch" style="background:#0f1117;box-shadow:0 8px 20px rgba(0,0,0,.35)"></div><div><strong>shadow.1</strong><br><small>0 8px 20px rgba(0,0,0,.35)</small></div><button class="copy" data-value="0 8px 20px rgba(0,0,0,.35)">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#0f1117;box-shadow:0 14px 40px rgba(0,0,0,.5)"></div><div><strong>shadow.2</strong><br><small>0 14px 40px rgba(0,0,0,.5)</small></div><button class="copy" data-value="0 14px 40px rgba(0,0,0,.5)">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#0f1117;box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 20px 60px rgba(0,0,0,.65)"></div><div><strong>shadow.3</strong><br><small>inset + deep</small></div><button class="copy" data-value="0 1px 0 rgba(255,255,255,.04) inset, 0 20px 60px rgba(0,0,0,.65)">Copy</button></div>
+    </div>
+  </section>
+
+  <!-- Borders & Opacity -->
+  <section id="borders">
+    <h2 style="font-size:20px;margin:12px 0">Borders</h2>
+    <div class="grid">
+      <div class="token"><div class="swatch" style="background:#0f1117;border:1px solid var(--border)"></div><div><strong>border.1</strong><br><small>1px</small></div><button class="copy" data-value="1px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#0f1117;border:2px solid var(--border)"></div><div><strong>border.2</strong><br><small>2px</small></div><button class="copy" data-value="2px">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:#0f1117;border:3px solid var(--border)"></div><div><strong>border.3</strong><br><small>3px</small></div><button class="copy" data-value="3px">Copy</button></div>
+    </div>
+  </section>
+
+  <section id="opacity">
+    <h2 style="font-size:20px;margin:12px 0">Opacity</h2>
+    <div class="grid">
+      <div class="token"><div class="swatch" style="background:linear-gradient(45deg, rgba(255,255,255,.08), rgba(255,255,255,.02))"></div><div><strong>overlay.1</strong><br><small>8%</small></div><button class="copy" data-value="8%">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:linear-gradient(45deg, rgba(255,255,255,.14), rgba(255,255,255,.04))"></div><div><strong>overlay.2</strong><br><small>14%</small></div><button class="copy" data-value="14%">Copy</button></div>
+      <div class="token"><div class="swatch" style="background:linear-gradient(45deg, rgba(255,255,255,.22), rgba(255,255,255,.08))"></div><div><strong>overlay.3</strong><br><small>22%</small></div><button class="copy" data-value="22%">Copy</button></div>
+    </div>
+  </section>
+
+  <!-- Z-index & Motion -->
+  <section id="zindex">
+    <h2 style="font-size:20px;margin:12px 0">Z‑index</h2>
+    <div class="grid">
+      <div class="token"><div class="swatch" style="display:grid;place-items:center;background:#0f1117">10</div><div><strong>z.base</strong><br><small>10</small></div><button class="copy" data-value="10">Copy</button></div>
+      <div class="token"><div class="swatch" style="display:grid;place-items:center;background:#0f1117">100</div><div><strong>z.overlay</strong><br><small>100</small></div><button class="copy" data-value="100">Copy</button></div>
+      <div class="token"><div class="swatch" style="display:grid;place-items:center;background:#0f1117">1000</div><div><strong>z.toast</strong><br><small>1000</small></div><button class="copy" data-value="1000">Copy</button></div>
+    </div>
+  </section>
+
+  <section id="motion">
+    <h2 style="font-size:20px;margin:12px 0">Motion</h2>
+    <div class="grid">
+      <div class="token"><div class="swatch" style="display:grid;place-items:center;color:#0b0c10;background:var(--accent)">150ms</div><div><strong>duration.fast</strong><br><small>150ms</small></div><button class="copy" data-value="150ms">Copy</button></div>
+      <div class="token"><div class="swatch" style="display:grid;place-items:center;color:#0b0c10;background:var(--accent)">300ms</div><div><strong>duration.base</strong><br><small>300ms</small></div><button class="copy" data-value="300ms">Copy</button></div>
+      <div class="token"><div class="swatch" style="display:grid;place-items:center;color:#0b0c10;background:var(--accent)">ease</div><div><strong>easing.default</strong><br><small>cubic-bezier(.22,1,.36,1)</small></div><button class="copy" data-value="cubic-bezier(.22,1,.36,1)">Copy</button></div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const root=document.documentElement, body=document.body;
+  const accentMap={purple:'--accent-purple',blue:'--accent-blue',teal:'--accent-teal',pink:'--accent-pink',yellow:'--accent-yellow',orange:'--accent-orange',lime:'--accent-lime'};
+  document.querySelectorAll('.pill[data-accent]').forEach(p=>p.addEventListener('click',()=>{const k=p.dataset.accent;const v=getComputedStyle(root).getPropertyValue(accentMap[k]).trim();root.style.setProperty('--accent',v);}));
+  document.querySelectorAll('.pill[data-focus]').forEach(p=>p.addEventListener('click',()=>{body.setAttribute('data-focus',p.dataset.focus);}));
+  document.querySelectorAll('.pill[data-motion]').forEach(p=>p.addEventListener('click',()=>{body.setAttribute('data-motion',p.dataset.motion);}));
+  document.querySelectorAll('.pill[data-contrast]').forEach(p=>p.addEventListener('click',()=>{body.setAttribute('data-contrast',p.dataset.contrast);}));
+  document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click', async ()=>{const v=btn.getAttribute('data-value');try{await navigator.clipboard.writeText(v);btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy',900);}catch{}}));
+</script>
+</body>
+</html>
