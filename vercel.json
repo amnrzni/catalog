@@ -1,8 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "buildCommand": "cd ui-ux-catalog && npm ci && npm run build",
-  "installCommand": "cd ui-ux-catalog && npm ci",
   "framework": "nextjs",
   "outputDirectory": "ui-ux-catalog/.next",
   "cleanUrls": true,
