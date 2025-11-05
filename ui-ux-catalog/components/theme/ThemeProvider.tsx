@@ -43,10 +43,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     
     if (typeof window === "undefined") return;
     
-    const savedAccent = localStorage.getItem("catalog-accent");
-    const savedFocus = localStorage.getItem("catalog-focus");
-    const savedMotion = localStorage.getItem("catalog-motion");
-    const savedContrast = localStorage.getItem("catalog-contrast");
+    const savedAccent = localStorage.getItem("catalog.accent");
+    const savedFocus = localStorage.getItem("catalog.focus");
+    const savedMotion = localStorage.getItem("catalog.motion");
+    const savedContrast = localStorage.getItem("catalog.contrast");
 
     if (savedAccent && savedAccent in ACCENT_MAP) {
       setAccentState(savedAccent as AccentColor);
@@ -85,22 +85,22 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const setAccent = (newAccent: AccentColor) => {
     setAccentState(newAccent);
-    localStorage.setItem("catalog-accent", newAccent);
+    localStorage.setItem("catalog.accent", newAccent);
   };
 
   const setFocus = (newFocus: FocusStyle) => {
     setFocusState(newFocus);
-    localStorage.setItem("catalog-focus", newFocus);
+    localStorage.setItem("catalog.focus", newFocus);
   };
 
   const setMotion = (newMotion: MotionMode) => {
     setMotionState(newMotion);
-    localStorage.setItem("catalog-motion", newMotion);
+    localStorage.setItem("catalog.motion", newMotion);
   };
 
   const setContrast = (newContrast: ContrastMode) => {
     setContrastState(newContrast);
-    localStorage.setItem("catalog-contrast", newContrast);
+    localStorage.setItem("catalog.contrast", newContrast);
   };
 
   // Don't render until mounted to avoid hydration mismatch
