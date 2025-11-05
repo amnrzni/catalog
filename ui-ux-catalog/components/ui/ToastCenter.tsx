@@ -21,15 +21,18 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const showToast = useCallback((message: string, type: ToastType = "info", duration: number = 3000) => {
-    const id = Math.random().toString(36).substring(2, 9);
+    const id = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
     const newToast: Toast = { id, message, type, duration };
     
     setToasts((prev) => [...prev, newToast]);
     
     if (duration > 0) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setToasts((prev) => prev.filter((toast) => toast.id !== id));
       }, duration);
+      
+      // Store timer for potential cleanup
+      return () => clearTimeout(timer);
     }
   }, []);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Panel from "@/components/ui/Panel";
 import CopyButton from "@/components/ui/CopyButton";
@@ -116,8 +116,15 @@ export default function UseCasesPage() {
   // KPI count-up effect
   const KPICard = ({ label, targetValue }: { label: string; targetValue: number }) => {
     const [value, setValue] = useState(0);
-    const motionReduced = typeof document !== "undefined" && 
-      document.body.getAttribute("data-motion") === "reduced";
+    const [motionReduced, setMotionReduced] = useState(false);
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+      // Check reduced motion on mount
+      const isReduced = typeof document !== "undefined" && 
+        document.body.getAttribute("data-motion") === "reduced";
+      setMotionReduced(isReduced);
+    }, []);
 
     useEffect(() => {
       if (motionReduced) {
@@ -130,17 +137,25 @@ export default function UseCasesPage() {
       const increment = targetValue / steps;
       let current = 0;
 
-      const timer = setInterval(() => {
+      timerRef.current = setInterval(() => {
         current += increment;
         if (current >= targetValue) {
           setValue(targetValue);
-          clearInterval(timer);
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+          }
         } else {
           setValue(Math.floor(current));
         }
       }, duration / steps);
 
-      return () => clearInterval(timer);
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+      };
     }, [targetValue, motionReduced]);
 
     return (
