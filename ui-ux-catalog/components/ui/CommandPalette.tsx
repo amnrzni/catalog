@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 interface CommandItem {
@@ -52,18 +52,46 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
       setTimeout(() => inputRef.current?.focus(), 100);
       document.body.style.overflow = "hidden";
     } else {
-      setSearch("");
-      setSelectedIndex(0);
+      const timer = setTimeout(() => {
+        setSearch("");
+        setSelectedIndex(0);
+      }, 0);
       document.body.style.overflow = "";
       if (previousFocusRef.current) {
         previousFocusRef.current.focus();
       }
+      return () => clearTimeout(timer);
     }
 
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  const handleNavigate = React.useCallback((path: string) => {
+    onClose();
+    
+    // Handle anchor links
+    if (path.includes("#")) {
+      const [route, anchor] = path.split("#");
+      if (route && route !== window.location.pathname) {
+        router.push(path);
+      } else {
+        const element = document.getElementById(anchor);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          // Set focus on the heading for accessibility
+          const heading = element.querySelector("h1, h2, h3, h4, h5, h6") as HTMLElement;
+          if (heading) {
+            heading.tabIndex = -1;
+            heading.focus();
+          }
+        }
+      }
+    } else {
+      router.push(path);
+    }
+  }, [onClose, router]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -88,37 +116,15 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, filteredItems, selectedIndex, onClose]);
+  }, [isOpen, filteredItems, selectedIndex, onClose, handleNavigate]);
 
   // Reset selected index when search changes
   useEffect(() => {
-    setSelectedIndex(0);
+    const timer = setTimeout(() => {
+      setSelectedIndex(0);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [search]);
-
-  const handleNavigate = (path: string) => {
-    onClose();
-    
-    // Handle anchor links
-    if (path.includes("#")) {
-      const [route, anchor] = path.split("#");
-      if (route && route !== window.location.pathname) {
-        router.push(path);
-      } else {
-        const element = document.getElementById(anchor);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-          // Set focus on the heading for accessibility
-          const heading = element.querySelector("h1, h2, h3, h4, h5, h6") as HTMLElement;
-          if (heading) {
-            heading.tabIndex = -1;
-            heading.focus();
-          }
-        }
-      }
-    } else {
-      router.push(path);
-    }
-  };
 
   if (!isOpen) return null;
 
@@ -236,7 +242,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                 >
                   {category}
                 </div>
-                {items.map((item, itemIndex) => {
+                {items.map((item) => {
                   const globalIndex = filteredItems.indexOf(item);
                   const isSelected = globalIndex === selectedIndex;
                   

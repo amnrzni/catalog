@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, ReactNode } from "react";
+import React, { useState, useRef, useEffect, ReactNode } from "react";
 
 interface Tab {
   id: string;
@@ -20,11 +20,7 @@ export default function SegmentedControl({ tabs, defaultTab, onChange }: Segment
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    updateIndicator();
-  }, [activeTab]);
-
-  const updateIndicator = () => {
+  const updateIndicator = React.useCallback(() => {
     const activeButton = tabRefs.current.get(activeTab);
     const container = containerRef.current;
     
@@ -37,7 +33,11 @@ export default function SegmentedControl({ tabs, defaultTab, onChange }: Segment
         width: buttonRect.width,
       });
     }
-  };
+  }, [activeTab]);
+
+  useEffect(() => {
+    updateIndicator();
+  }, [updateIndicator]);
 
   const handleTabChange = (tabId: string) => {
     setActiveTab(tabId);
@@ -61,8 +61,6 @@ export default function SegmentedControl({ tabs, defaultTab, onChange }: Segment
     handleTabChange(newTab.id);
     tabRefs.current.get(newTab.id)?.focus();
   };
-
-  const activeContent = tabs.find((tab) => tab.id === activeTab)?.content;
 
   return (
     <div>

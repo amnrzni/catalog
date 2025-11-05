@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Panel from "@/components/ui/Panel";
 import CopyButton from "@/components/ui/CopyButton";

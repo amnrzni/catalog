@@ -7,8 +7,6 @@ import CopyButton from "@/components/ui/CopyButton";
 import SegmentedControl from "@/components/ui/SegmentedControl";
 import Drawer from "@/components/ui/Drawer";
 import { useToast } from "@/components/ui/ToastCenter";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
 
 export default function LibraryPage() {
   const [inputValue, setInputValue] = useState("");

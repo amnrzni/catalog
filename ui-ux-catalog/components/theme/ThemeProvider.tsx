@@ -39,6 +39,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   // Load preferences from localStorage on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     
     if (typeof window === "undefined") return;

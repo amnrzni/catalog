@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, ReactNode, useEffect } from "react";
+import { createContext, useContext, useState, useCallback, ReactNode } from "react";
 
 type ToastType = "success" | "error" | "info" | "warning";
 
@@ -66,7 +66,6 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 }
 
 function ToastItem({ toast, onClose }: { toast: Toast; onClose: () => void }) {
-  const [isPaused, setIsPaused] = useState(false);
 
   const getIcon = () => {
     switch (toast.type) {
@@ -89,8 +88,6 @@ function ToastItem({ toast, onClose }: { toast: Toast; onClose: () => void }) {
   return (
     <div
       className="toast"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
       style={{
         background: "var(--surface-2)",
         border: "1px solid var(--border)",
