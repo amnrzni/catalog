@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Catalog — Beautiful UI, simplified</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0c10; --surface:#101119; --surface-2:#141725; --text:#E6E7EC; --muted:#A1A4AD; --border:#232637;
+    --accent:#a78bfa; --radius:16px;
+    --shadow-1:0 1px 0 rgba(255,255,255,.03) inset, 0 10px 30px rgba(0,0,0,.35);
+    --shadow-2:0 1px 0 rgba(255,255,255,.04) inset, 0 14px 44px rgba(0,0,0,.5);
+    --accent-purple:#a78bfa; --accent-blue:#60a5fa; --accent-teal:#22d3ee; --accent-pink:#fb5fb1; --accent-yellow:#ffd60a; --accent-orange:#ff8c3a; --accent-lime:#84cc16;
+  }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  a{color:inherit;text-decoration:none}
+  .container{width:min(1100px,92vw);margin-inline:auto}
+  header{position:sticky;top:0;z-index:20;background:rgba(11,12,16,.6);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--border)}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:800}
+  .dot{width:20px;height:20px;border-radius:6px;background:var(--accent)}
+  .links{display:flex;gap:1rem;color:var(--muted)}
+  .links a:hover{color:var(--text)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1rem;border-radius:999px;border:1px solid transparent;font-weight:600;transition:all .2s ease}
+  .btn-primary{background:var(--accent);color:#0b0c10}
+  .btn-primary:hover{filter:brightness(1.05); transform:translateY(-1px)}
+  .btn-ghost{border-color:rgba(255,255,255,.08);color:var(--text);background:transparent}
+  .btn-ghost:hover{background:rgba(255,255,255,.05)}
+  .hero{position:relative;isolation:isolate}
+  .pad-hero{padding:clamp(72px,9vw,120px) 0 46px}
+  .radial{position:absolute;inset:-25% -10% auto -10%;height:70vh;pointer-events:none;z-index:-1;
+    background:radial-gradient(600px 600px at 50% 22%, color-mix(in oklab,var(--accent) 14%, transparent), transparent 60%),
+               radial-gradient(1000px 600px at 80% 30%, rgba(255,255,255,.05), transparent 60%);
+    mask-image:radial-gradient(1000px 600px at 50% 30%, #000 55%, transparent 72%);
+    opacity:.9;}
+  .tag{display:inline-block;padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600}
+  h1{margin:12px 0 16px;font-weight:800;letter-spacing:-.02em;font-size:clamp(40px,6vw,64px);line-height:1.07}
+  .lead{color:var(--muted);font-size:clamp(16px,2.1vw,19px);line-height:1.7;max-width:60ch}
+  .cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:22px}
+  section{padding:70px 0;border-top:1px solid color-mix(in oklab,var(--border),transparent 30%)} section:first-of-type{border-top:none}
+  /* features */
+  .features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .feature{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 35%);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow-1);display:flex;gap:.8rem;align-items:flex-start}
+  .chip{width:34px;height:34px;border-radius:10px;background:color-mix(in oklab, var(--accent) 22%, #000);display:grid;place-items:center;color:#0b0c10;font-weight:700}
+  .feature h4{margin:0 0 4px} .feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+  /* index cards */
+  .modules{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 40%);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow-1);transition:transform .18s ease, box-shadow .18s ease}
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2)}
+  .card h3{margin:0 0 6px;font-size:20px}
+  .card p{margin:0;color:var(--muted)}
+  .span-4{grid-column:span 4} .span-6{grid-column:span 6} .span-12{grid-column:span 12}
+  footer{color:var(--muted);font-size:13px;padding:50px 0}
+  /* animation reveals */
+  .reveal{opacity:0; transform:translateY(12px); transition:opacity .45s ease, transform .45s ease}
+  .reveal.in{opacity:1; transform:none}
+  /* accent switcher */
+  .pills{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:12px}
+  .pill{display:inline-flex;align-items:center;gap:.45rem;padding:.45rem .7rem;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--muted);font-size:13px;cursor:pointer}
+  .sw{width:14px;height:14px;border-radius:50%}
+  @media (max-width: 900px){.features{grid-template-columns:1fr}.modules{grid-template-columns:1fr}.span-4,.span-6,.span-12{grid-column:auto}}
+  @media (prefers-reduced-motion: reduce){.reveal{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="brand"><span class="dot"></span> Catalog</div>
+      <div class="links">
+        <a href="home.html">Home</a>
+        <a href="library.html">Components</a>
+        <a href="patterns.html">Patterns</a>
+        <a href="animations.html">Animations</a>
+        <a href="use-cases.html">Use cases</a>
+        <a href="tokens.html">Tokens</a>
+      </div>
+      <a class="btn btn-primary" href="library.html">Get started</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="radial"></div>
+    <div class="container pad-hero">
+      <span class="tag">Design System</span>
+      <h1>Beautiful UI, simplified.</h1>
+      <p class="lead">A focused catalog of components, patterns, tokens, and animations—production‑ready, accessible, and vibrant on a dark canvas.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="library.html">Explore components</a>
+        <a class="btn btn-ghost" href="animations.html">View animations</a>
+        <a class="btn btn-ghost" href="patterns.html">Browse patterns</a>
+      </div>
+      <div class="pills">
+        <span class="pill" data-accent="purple"><span class="sw" style="background:var(--accent-purple)"></span>Purple</span>
+        <span class="pill" data-accent="blue"><span class="sw" style="background:var(--accent-blue)"></span>Blue</span>
+        <span class="pill" data-accent="teal"><span class="sw" style="background:var(--accent-teal)"></span>Teal</span>
+        <span class="pill" data-accent="pink"><span class="sw" style="background:var(--accent-pink)"></span>Pink</span>
+        <span class="pill" data-accent="yellow"><span class="sw" style="background:var(--accent-yellow)"></span>Yellow</span>
+        <span class="pill" data-accent="orange"><span class="sw" style="background:var(--accent-orange)"></span>Orange</span>
+        <span class="pill" data-accent="lime"><span class="sw" style="background:var(--accent-lime)"></span>Lime</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expanded Features (mapped to your approvals) -->
+  <section>
+    <div class="container">
+      <div class="features">
+        <div class="feature reveal"><div class="chip">🎨</div><div><h4>Expanded tokens</h4><p>Colors, spacing, radii, shadows, motion, z‑index, opacity, borders.</p></div></div>
+        <div class="feature reveal"><div class="chip">♿</div><div><h4>Accessibility presets</h4><p>High‑contrast, reduced motion, and focus ring styles.</p></div></div>
+        <div class="feature reveal"><div class="chip">🧭</div><div><h4>Navigation & input</h4><p>Command palette, breadcrumbs, segmented control.</p></div></div>
+        <div class="feature reveal"><div class="chip">📝</div><div><h4>Forms & inputs</h4><p>Combobox, date range, file upload, validation patterns.</p></div></div>
+        <div class="feature reveal"><div class="chip">📊</div><div><h4>Data display & tables</h4><p>Virtualized table, pin/resize/sort/filter.</p></div></div>
+        <div class="feature reveal"><div class="chip">🧩</div><div><h4>Overlays & feedback</h4><p>Drawer, popover/menu, stepper, toast center.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Index cards for quick nav -->
+  <section>
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+        <h2 style="margin:0;font-size:30px;letter-spacing:-.01em">Explore the catalog</h2>
+        <a class="tag" href="library.html">Browse all</a>
+      </div>
+      <div class="modules">
+        <a class="card span-4 reveal" href="library.html#navigation"><h3>Navigation & Input</h3><p>Spotlight, breadcrumbs, segmented control.</p></a>
+        <a class="card span-4 reveal" href="library.html#forms"><h3>Forms & Inputs</h3><p>Combobox, date range, file uploader.</p></a>
+        <a class="card span-4 reveal" href="library.html#data"><h3>Data display & tables</h3><p>Table, timeline, tree, KPI cards.</p></a>
+        <a class="card span-4 reveal" href="library.html#overlays"><h3>Overlays & feedback</h3><p>Dialog, drawer, toasts, stepper.</p></a>
+        <a class="card span-4 reveal" href="library.html#rich"><h3>Rich content</h3><p>MDX blocks, code, diff, editor.</p></a>
+        <a class="card span-12 reveal" href="animations.html"><h3>Animations</h3><p>Micro interactions, route transitions, layout, scroll.</p></a>
+        <a class="card span-6 reveal" href="patterns.html"><h3>Patterns</h3><p>All production flows in one place.</p></a>
+        <a class="card span-6 reveal" href="use-cases.html"><h3>Use cases</h3><p>Announcements, forms, dashboard, docs.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="container">© 2025 Catalog — Dark by default. Vibrant on demand.</div></footer>
+</main>
+
+<script>
+  // accent switcher
+  const map={purple:'--accent-purple',blue:'--accent-blue',teal:'--accent-teal',pink:'--accent-pink',yellow:'--accent-yellow',orange:'--accent-orange',lime:'--accent-lime'};
+  document.querySelectorAll('.pill').forEach(p=>{
+    p.addEventListener('click',()=>{const k=p.dataset.accent;const v=getComputedStyle(document.documentElement).getPropertyValue(map[k]).trim();document.documentElement.style.setProperty('--accent',v);});
+  });
+  // reveal on view
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);}})},{threshold:.2});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
