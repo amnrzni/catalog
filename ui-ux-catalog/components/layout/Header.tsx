@@ -1,36 +1,33 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { getCollectionCount } from '@/lib/collection-storage';
 import Badge from '@/components/ui/Badge';
 
+// Subscribe function for collection updates
+function subscribe(callback: () => void) {
+  window.addEventListener('collectionUpdate', callback);
+  return () => window.removeEventListener('collectionUpdate', callback);
+}
+
+// Get current collection count
+function getSnapshot() {
+  return typeof window !== 'undefined' ? getCollectionCount() : 0;
+}
+
+// Server-side snapshot (always 0)
+function getServerSnapshot() {
+  return 0;
+}
+
 export default function Header() {
-  const [collectionCount, setCollectionCount] = useState(0);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    // Mark as mounted after first render to prevent hydration mismatch
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    
-    // Initialize collection count from localStorage
-    setCollectionCount(getCollectionCount());
-
-    const handleCollectionUpdate = () => {
-      setCollectionCount(getCollectionCount());
-    };
-
-    window.addEventListener('collectionUpdate', handleCollectionUpdate);
-    return () => window.removeEventListener('collectionUpdate', handleCollectionUpdate);
-  }, [mounted]);
-
-  if (!mounted) {
-    return null; // Prevent hydration mismatch
-  }
+  // Use useSyncExternalStore to sync with localStorage
+  const collectionCount = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
 
   return (
     <header className="sticky top-0 z-50 glass-strong border-b border-primary/10 shadow-xl">
