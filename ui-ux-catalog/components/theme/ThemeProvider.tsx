@@ -127,7 +127,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    // Return default values if not in ThemeProvider (e.g., during SSR)
+    return {
+      accent: "purple" as const,
+      setAccent: () => {},
+      focus: "ring" as const,
+      setFocus: () => {},
+      motion: "base" as const,
+      setMotion: () => {},
+      contrast: "normal" as const,
+      setContrast: () => {},
+    };
   }
   return context;
 }
