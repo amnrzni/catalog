@@ -1,189 +1,296 @@
+"use client";
+
 import Link from "next/link";
-import Sphere3D from "@/components/ui/3d-objects/Sphere3D";
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
+import AccentSwitcher from "@/components/ui/AccentSwitcher";
+
+export const dynamic = "force-dynamic";
 
 export default function Home() {
-  const navigationCards = [
-    {
-      title: "Components",
-      description: "Browse our collection of beautiful, reusable UI components",
-      icon: "box",
-      href: "/components",
-      gradient: "from-primary to-primary-dark",
-    },
-    {
-      title: "Use Cases",
-      description: "Discover real-world applications and implementation patterns",
-      icon: "lightbulb",
-      href: "/use-cases",
-      gradient: "from-accent-blue to-blue-600",
-    },
-    {
-      title: "Design Tokens",
-      description: "Explore our comprehensive design system tokens and variables",
-      icon: "palette",
-      href: "/design-tokens",
-      gradient: "from-accent-pink to-pink-600",
-    },
-    {
-      title: "Search",
-      description: "Find exactly what you need with powerful search and filters",
-      icon: "search",
-      href: "/search",
-      gradient: "from-accent-orange to-orange-600",
-    },
-    {
-      title: "My Collection",
-      description: "View and export your saved components and patterns",
-      icon: "bookmark",
-      href: "/collection",
-      gradient: "from-accent-green to-emerald-600",
-    },
-    {
-      title: "Examples",
-      description: "Complete templates and case studies for inspiration",
-      icon: "layout-template",
-      href: "/examples/templates",
-      gradient: "from-purple-500 to-indigo-600",
-    },
-  ];
-
   return (
-    <div className="relative overflow-hidden min-h-screen">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 gradient-bg-animated opacity-40" aria-hidden="true" />
-      
-      {/* Floating decorative elements */}
-      <div className="absolute top-20 left-10 w-40 h-40 floating-circle purple animate-float" aria-hidden="true" />
-      <div className="absolute bottom-40 right-20 w-48 h-48 floating-circle pink animate-float-delayed" aria-hidden="true" />
-      <div className="absolute top-1/2 right-10 w-32 h-32 floating-circle blue animate-float" aria-hidden="true" />
-      <div className="absolute top-1/3 left-1/4 w-36 h-36 floating-circle purple animate-float-delayed" style={{ animationDelay: '1s' }} aria-hidden="true" />
-
+    <main>
       {/* Hero Section */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
-          {/* Hero Content */}
-          <div className="flex-1 text-center lg:text-left z-10">
-            <div className="inline-block mb-4 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <span className="text-primary-light text-sm font-medium">✨ Modern Design System</span>
-            </div>
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight">
-              <span className="gradient-text bg-gradient-to-r from-primary-light via-primary to-primary-dark bg-clip-text text-transparent animate-glow">Beautiful UI</span>
-              <br />
-              <span className="text-text-primary drop-shadow-lg">Design System</span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-text-secondary mb-10 max-w-2xl leading-relaxed">
-              A comprehensive, elegant design catalog featuring reusable components, 
-              design patterns, and complete templates with <span className="text-primary-light font-semibold">modern dark theme</span> aesthetic.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-              <Link href="/components">
-                <Button size="large" variant="primary" className="group">
-                  <span>Explore Components</span>
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </Button>
-              </Link>
-              <Link href="/design-tokens">
-                <Button size="large" variant="secondary">
-                  View Design Tokens
-                </Button>
-              </Link>
-            </div>
-          </div>
+      <section className="hero" style={{ position: "relative", isolation: "isolate" }}>
+        {/* Radial background effect */}
+        <div
+          className="radial"
+          style={{
+            position: "absolute",
+            inset: "-25% -10% auto -10%",
+            height: "70vh",
+            pointerEvents: "none",
+            zIndex: -1,
+            background: `radial-gradient(600px 600px at 50% 22%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%),
+                        radial-gradient(1000px 600px at 80% 30%, rgba(255,255,255,0.05), transparent 60%)`,
+            maskImage: "radial-gradient(1000px 600px at 50% 30%, #000 55%, transparent 72%)",
+            opacity: 0.9,
+          }}
+          aria-hidden="true"
+        />
 
-          {/* 3D Sphere */}
-          <div className="flex-1 flex justify-center lg:justify-end z-10">
-            <div className="relative">
-              <Sphere3D size={400} />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Navigation Cards */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-text-primary mb-4">
-            Explore the Catalog
-          </h2>
-          <p className="text-lg text-text-tertiary max-w-2xl mx-auto">
-            Discover our comprehensive collection of components, patterns, and design resources
+        <div className="container" style={{ padding: "clamp(72px, 9vw, 120px) 0 46px" }}>
+          <span
+            className="tag"
+            style={{
+              display: "inline-block",
+              padding: "0.35rem 0.6rem",
+              borderRadius: "999px",
+              background: "rgba(255, 255, 255, 0.05)",
+              border: "1px solid var(--border)",
+              color: "var(--muted)",
+              fontSize: "12px",
+              fontWeight: 600,
+            }}
+          >
+            Design System
+          </span>
+          <h1
+            style={{
+              margin: "12px 0 16px",
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+              fontSize: "clamp(40px, 6vw, 64px)",
+              lineHeight: 1.07,
+            }}
+          >
+            Beautiful UI, simplified.
+          </h1>
+          <p
+            className="lead"
+            style={{
+              color: "var(--muted)",
+              fontSize: "clamp(16px, 2.1vw, 19px)",
+              lineHeight: 1.7,
+              maxWidth: "60ch",
+            }}
+          >
+            A focused catalog of components, patterns, tokens, and animations—production‑ready, accessible, and vibrant on a dark canvas.
           </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
-          {navigationCards.map((card) => (
-            <Link key={card.href} href={card.href}>
-              <Card hover glassmorphism className="h-full group relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="flex flex-col h-full relative z-10 p-2">
-                  {/* Icon */}
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${card.gradient} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg`}>
-                    <i className={`lucide-${card.icon} text-white text-2xl`} />
-                  </div>
-                  
-                  {/* Content */}
-                  <h3 className="text-2xl font-bold text-text-primary mb-3 group-hover:text-primary-light transition-colors">
-                    {card.title}
-                  </h3>
-                  <p className="text-text-tertiary flex-1 leading-relaxed">
-                    {card.description}
-                  </p>
-                  
-                  {/* Arrow icon */}
-                  <div className="mt-6 flex items-center text-primary-light group-hover:translate-x-3 transition-all duration-300">
-                    <span className="text-sm font-semibold tracking-wide">Explore</span>
-                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                </div>
-              </Card>
+          <div
+            className="cta"
+            style={{
+              display: "flex",
+              gap: "0.8rem",
+              flexWrap: "wrap",
+              marginTop: "22px",
+            }}
+          >
+            <Link
+              href="/library"
+              className="btn-primary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.75rem 1rem",
+                borderRadius: "999px",
+                border: "1px solid transparent",
+                fontWeight: 600,
+                background: "var(--accent)",
+                color: "var(--bg)",
+                transition: "all 0.2s ease",
+              }}
+            >
+              Explore components
             </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="glass-strong rounded-3xl p-8 md:p-12">
-          <h2 className="text-3xl font-bold text-text-primary mb-8 text-center">
-            Why Choose Our Catalog?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-text-primary mb-2">Fast & Modern</h3>
-              <p className="text-text-tertiary">Built with Next.js 14+ and optimized for performance</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent-pink to-pink-600 flex items-center justify-center">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-text-primary mb-2">Fully Accessible</h3>
-              <p className="text-text-tertiary">WCAG 2.1 AA compliant with keyboard navigation</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent-blue to-blue-600 flex items-center justify-center">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-text-primary mb-2">Customizable</h3>
-              <p className="text-text-tertiary">Easy to customize with design tokens and Tailwind</p>
-            </div>
+            <Link
+              href="/animations"
+              className="btn-ghost"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.75rem 1rem",
+                borderRadius: "999px",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                fontWeight: 600,
+                background: "transparent",
+                color: "var(--text)",
+                transition: "all 0.2s ease",
+              }}
+            >
+              View animations
+            </Link>
+            <Link
+              href="/patterns"
+              className="btn-ghost"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.75rem 1rem",
+                borderRadius: "999px",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                fontWeight: 600,
+                background: "transparent",
+                color: "var(--text)",
+                transition: "all 0.2s ease",
+              }}
+            >
+              Browse patterns
+            </Link>
+          </div>
+          <div style={{ marginTop: "12px" }}>
+            <AccentSwitcher />
           </div>
         </div>
       </section>
-    </div>
+
+      {/* Expanded Features */}
+      <section style={{ padding: "70px 0", borderTop: "1px solid color-mix(in oklab, var(--border), transparent 30%)" }}>
+        <div className="container">
+          <div
+            className="features"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "16px",
+            }}
+          >
+            {[
+              { emoji: "🎨", title: "Expanded tokens", desc: "Colors, spacing, radii, shadows, motion, z‑index, opacity, borders." },
+              { emoji: "♿", title: "Accessibility presets", desc: "High‑contrast, reduced motion, and focus ring styles." },
+              { emoji: "🧭", title: "Navigation & input", desc: "Command palette, breadcrumbs, segmented control." },
+              { emoji: "📝", title: "Forms & inputs", desc: "Combobox, date range, file upload, validation patterns." },
+              { emoji: "📊", title: "Data display & tables", desc: "Virtualized table, pin/resize/sort/filter." },
+              { emoji: "🧩", title: "Overlays & feedback", desc: "Drawer, popover/menu, stepper, toast center." },
+            ].map((feature, i) => (
+              <div
+                key={i}
+                className="feature"
+                style={{
+                  background: "linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 35%)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius)",
+                  padding: "18px 16px",
+                  boxShadow: "var(--shadow-1)",
+                  display: "flex",
+                  gap: "0.8rem",
+                  alignItems: "flex-start",
+                }}
+              >
+                <div
+                  className="chip"
+                  style={{
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "10px",
+                    background: "color-mix(in oklab, var(--accent) 22%, #000)",
+                    display: "grid",
+                    placeItems: "center",
+                    fontSize: "18px",
+                  }}
+                >
+                  {feature.emoji}
+                </div>
+                <div>
+                  <h4 style={{ margin: "0 0 4px", fontSize: "16px", fontWeight: 600 }}>
+                    {feature.title}
+                  </h4>
+                  <p style={{ margin: 0, color: "var(--muted)", fontSize: "14px", lineHeight: 1.6 }}>
+                    {feature.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Index cards for quick nav */}
+      <section style={{ padding: "70px 0" }}>
+        <div className="container">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "18px",
+            }}
+          >
+            <h2 style={{ margin: 0, fontSize: "30px", letterSpacing: "-0.01em" }}>
+              Explore the catalog
+            </h2>
+            <Link
+              href="/library"
+              className="tag"
+              style={{
+                display: "inline-block",
+                padding: "0.35rem 0.6rem",
+                borderRadius: "999px",
+                background: "rgba(255, 255, 255, 0.05)",
+                border: "1px solid var(--border)",
+                color: "var(--muted)",
+                fontSize: "12px",
+                fontWeight: 600,
+              }}
+            >
+              Browse all
+            </Link>
+          </div>
+          <div
+            className="modules"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(12, 1fr)",
+              gap: "16px",
+            }}
+          >
+            {[
+              { title: "Navigation & Input", desc: "Spotlight, breadcrumbs, segmented control.", href: "/library#navigation", span: 4 },
+              { title: "Forms & Inputs", desc: "Combobox, date range, file uploader.", href: "/library#forms", span: 4 },
+              { title: "Data display & tables", desc: "Table, timeline, tree, KPI cards.", href: "/library#data", span: 4 },
+              { title: "Overlays & feedback", desc: "Dialog, drawer, toasts, stepper.", href: "/library#overlays", span: 4 },
+              { title: "Rich content", desc: "MDX blocks, code, diff, editor.", href: "/library#rich", span: 4 },
+              { title: "Animations", desc: "Micro interactions, route transitions, layout, scroll.", href: "/animations", span: 12 },
+              { title: "Patterns", desc: "All production flows in one place.", href: "/patterns", span: 6 },
+              { title: "Use cases", desc: "Announcements, forms, dashboard, docs.", href: "/use-cases", span: 6 },
+            ].map((card, i) => (
+              <Link
+                key={i}
+                href={card.href}
+                className="card"
+                style={{
+                  gridColumn: `span ${card.span}`,
+                  background: "linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 40%)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "20px",
+                  padding: "22px",
+                  boxShadow: "var(--shadow-1)",
+                  transition: "transform 0.18s ease, box-shadow 0.18s ease",
+                }}
+              >
+                <h3 style={{ margin: "0 0 6px", fontSize: "20px" }}>{card.title}</h3>
+                <p style={{ margin: 0, color: "var(--muted)" }}>{card.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <style jsx>{`
+        .btn-primary:hover {
+          filter: brightness(1.05);
+          transform: translateY(-1px);
+        }
+        .btn-ghost:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        .card:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-2);
+        }
+        @media (max-width: 900px) {
+          .features {
+            grid-template-columns: 1fr !important;
+          }
+          .modules {
+            grid-template-columns: 1fr !important;
+          }
+          .modules .card {
+            grid-column: auto !important;
+          }
+        }
+      `}</style>
+    </main>
   );
 }
