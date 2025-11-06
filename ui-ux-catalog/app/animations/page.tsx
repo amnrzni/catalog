@@ -11,6 +11,8 @@ export default function AnimationsPage() {
   const [staggerKey, setStaggerKey] = useState(0);
   const [crossfadeState, setCrossfadeState] = useState(false);
   const [layoutState, setLayoutState] = useState(false);
+  const [snackbarVisible, setSnackbarVisible] = useState(true);
+  const [snackbarKey, setSnackbarKey] = useState(0);
 
   const animations = [
     {
@@ -117,37 +119,75 @@ export default function AnimationsPage() {
       title: "Snackbar in",
       desc: "Slide & fade",
       demo: (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "14px",
-            left: "14px",
-            right: "14px",
-            display: "flex",
-            gap: "8px",
-            alignItems: "center",
-            animation: "fadeUp 0.45s ease-out",
-          }}
-        >
-          <div
-            style={{
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
-              background: "var(--accent)",
-            }}
-          />
-          <div
-            style={{
-              flex: 1,
-              height: "10px",
-              borderRadius: "8px",
-              background: "rgba(255, 255, 255, 0.12)",
-            }}
-          />
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          {snackbarVisible && (
+            <div
+              key={`snackbar-${snackbarKey}`}
+              style={{
+                position: "absolute",
+                bottom: "14px",
+                left: "14px",
+                right: "14px",
+                display: "flex",
+                gap: "8px",
+                alignItems: "center",
+                padding: "8px 10px",
+                borderRadius: "8px",
+                background: "rgba(255, 255, 255, 0.08)",
+                border: "1px solid var(--border)",
+                animation: "fadeUp 0.45s ease-out",
+              }}
+            >
+              <div
+                style={{
+                  width: "12px",
+                  height: "12px",
+                  borderRadius: "50%",
+                  background: "var(--accent)",
+                  flexShrink: 0,
+                }}
+              />
+              <div
+                style={{
+                  flex: 1,
+                  fontSize: "11px",
+                  color: "var(--text)",
+                }}
+              >
+                Action completed
+              </div>
+              <button
+                type="button"
+                onClick={() => setSnackbarVisible(false)}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  color: "var(--muted)",
+                  cursor: "pointer",
+                  padding: "2px",
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "14px",
+                }}
+                aria-label="Dismiss"
+              >
+                ✕
+              </button>
+            </div>
+          )}
         </div>
       ),
-      action: null,
+      action: { 
+        label: snackbarVisible ? "Dismiss" : "Replay", 
+        onClick: () => {
+          if (snackbarVisible) {
+            setSnackbarVisible(false);
+          } else {
+            setSnackbarKey((k) => k + 1);
+            setSnackbarVisible(true);
+          }
+        } 
+      },
     },
     {
       category: "route",
