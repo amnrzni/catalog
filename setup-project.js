@@ -52,6 +52,10 @@ const fileMappings = {
   'app.layout.tsx': 'app/layout.tsx',
   'app.globals.css': 'app/globals.css',
   'app.page.tsx': 'app/page.tsx',
+  'components.glassmorphism.Button.index.tsx': 'components/glassmorphism/Button/index.tsx',
+  'components.glassmorphism.Button.animations.ts': 'components/glassmorphism/Button/animations.ts',
+  'components.glassmorphism.Card.index.tsx': 'components/glassmorphism/Card/index.tsx',
+  'components.glassmorphism.Input.index.tsx': 'components/glassmorphism/Input/index.tsx',
 };
 
 // Create directories
