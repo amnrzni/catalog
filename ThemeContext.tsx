@@ -1,7 +1,11 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { ThemeContextType } from '@/types';
+
+export interface ThemeContextType {
+  currentStyle: 'glassmorphism' | 'neumorphism' | 'material' | 'minimalism';
+  setStyle: (style: ThemeContextType['currentStyle']) => void;
+}
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 

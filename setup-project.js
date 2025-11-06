@@ -42,6 +42,15 @@ const directories = [
   'public/images'
 ];
 
+// File mappings (source -> destination)
+const fileMappings = {
+  'types.index.ts': 'types/index.ts',
+  'lib.utils.cn.ts': 'lib/utils/cn.ts',
+  'lib.animations.variants.ts': 'lib/animations/variants.ts',
+  'ThemeContext.tsx': 'contexts/ThemeContext.tsx',
+  'AnimationContext.tsx': 'contexts/AnimationContext.tsx',
+};
+
 // Create directories
 console.log('📁 Creating directories...');
 directories.forEach(dir => {
@@ -51,6 +60,24 @@ directories.forEach(dir => {
     console.log(`   ✓ Created: ${dir}`);
   } else {
     console.log(`   - Exists: ${dir}`);
+  }
+});
+
+// Move files to proper locations
+console.log('\n📦 Moving files to proper locations...');
+Object.entries(fileMappings).forEach(([source, dest]) => {
+  const sourcePath = path.join(process.cwd(), source);
+  const destPath = path.join(process.cwd(), dest);
+  
+  if (fs.existsSync(sourcePath)) {
+    try {
+      fs.renameSync(sourcePath, destPath);
+      console.log(`   ✓ Moved: ${source} → ${dest}`);
+    } catch (error) {
+      console.log(`   ✗ Failed to move ${source}: ${error.message}`);
+    }
+  } else {
+    console.log(`   - Source not found: ${source}`);
   }
 });
 

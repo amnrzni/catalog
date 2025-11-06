@@ -1,7 +1,13 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { AnimationContextType } from '@/types';
+
+export interface AnimationContextType {
+  animationEnabled: boolean;
+  toggleAnimation: () => void;
+  animationSpeed: 'slow' | 'normal' | 'fast';
+  setAnimationSpeed: (speed: AnimationContextType['animationSpeed']) => void;
+}
 
 const AnimationContext = createContext<AnimationContextType | undefined>(undefined);
 
