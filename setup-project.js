@@ -49,6 +49,9 @@ const fileMappings = {
   'lib.animations.variants.ts': 'lib/animations/variants.ts',
   'ThemeContext.tsx': 'contexts/ThemeContext.tsx',
   'AnimationContext.tsx': 'contexts/AnimationContext.tsx',
+  'app.layout.tsx': 'app/layout.tsx',
+  'app.globals.css': 'app/globals.css',
+  'app.page.tsx': 'app/page.tsx',
 };
 
 // Create directories
