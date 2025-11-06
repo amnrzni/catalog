@@ -1,11 +1,60 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import AccentSwitcher from "@/components/ui/AccentSwitcher";
 
 export const dynamic = "force-dynamic";
 
 export default function Home() {
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const catalogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Check if reduced motion is preferred
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isReducedMotion = document.body.getAttribute('data-motion') === 'reduced';
+    
+    if (prefersReducedMotion || isReducedMotion) {
+      // Skip animations if reduced motion is preferred
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px',
+      }
+    );
+
+    // Observe feature cards
+    if (featuresRef.current) {
+      const featureCards = featuresRef.current.querySelectorAll('.feature');
+      featureCards.forEach((card, index) => {
+        (card as HTMLElement).style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(card);
+      });
+    }
+
+    // Observe catalog cards
+    if (catalogRef.current) {
+      const catalogCards = catalogRef.current.querySelectorAll('.catalog-card');
+      catalogCards.forEach((card, index) => {
+        (card as HTMLElement).style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(card);
+      });
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main>
       {/* Hero Section */}
@@ -139,6 +188,7 @@ export default function Home() {
       <section style={{ padding: "70px 0", borderTop: "1px solid color-mix(in oklab, var(--border), transparent 30%)" }}>
         <div className="container">
           <div
+            ref={featuresRef}
             className="features"
             style={{
               display: "grid",
@@ -156,7 +206,7 @@ export default function Home() {
             ].map((feature, i) => (
               <div
                 key={i}
-                className="feature"
+                className="feature reveal"
                 style={{
                   background: "linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 35%)",
                   border: "1px solid var(--border)",
@@ -228,6 +278,7 @@ export default function Home() {
             </Link>
           </div>
           <div
+            ref={catalogRef}
             className="modules"
             style={{
               display: "grid",
@@ -248,7 +299,7 @@ export default function Home() {
               <Link
                 key={i}
                 href={card.href}
-                className="card"
+                className="card catalog-card reveal"
                 style={{
                   gridColumn: `span ${card.span}`,
                   background: "linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 40%)",
@@ -268,6 +319,35 @@ export default function Home() {
       </section>
 
       <style jsx>{`
+        /* Scroll reveal animations */
+        .reveal {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .reveal-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        /* Respect reduced motion */
+        [data-motion="reduced"] .reveal,
+        [data-motion="reduced"] .reveal-visible {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .reveal,
+          .reveal-visible {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+        }
+        
         .btn-primary:hover {
           filter: brightness(1.05);
           transform: translateY(-1px);

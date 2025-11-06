@@ -11,6 +11,8 @@ export default function AnimationsPage() {
   const [staggerKey, setStaggerKey] = useState(0);
   const [crossfadeState, setCrossfadeState] = useState(false);
   const [layoutState, setLayoutState] = useState(false);
+  const [snackbarVisible, setSnackbarVisible] = useState(true);
+  const [snackbarKey, setSnackbarKey] = useState(0);
 
   const animations = [
     {
@@ -117,37 +119,75 @@ export default function AnimationsPage() {
       title: "Snackbar in",
       desc: "Slide & fade",
       demo: (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "14px",
-            left: "14px",
-            right: "14px",
-            display: "flex",
-            gap: "8px",
-            alignItems: "center",
-            animation: "fadeUp 0.45s ease-out",
-          }}
-        >
-          <div
-            style={{
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
-              background: "var(--accent)",
-            }}
-          />
-          <div
-            style={{
-              flex: 1,
-              height: "10px",
-              borderRadius: "8px",
-              background: "rgba(255, 255, 255, 0.12)",
-            }}
-          />
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          {snackbarVisible && (
+            <div
+              key={`snackbar-${snackbarKey}`}
+              style={{
+                position: "absolute",
+                bottom: "14px",
+                left: "14px",
+                right: "14px",
+                display: "flex",
+                gap: "8px",
+                alignItems: "center",
+                padding: "8px 10px",
+                borderRadius: "8px",
+                background: "rgba(255, 255, 255, 0.08)",
+                border: "1px solid var(--border)",
+                animation: "fadeUp 0.45s ease-out",
+              }}
+            >
+              <div
+                style={{
+                  width: "12px",
+                  height: "12px",
+                  borderRadius: "50%",
+                  background: "var(--accent)",
+                  flexShrink: 0,
+                }}
+              />
+              <div
+                style={{
+                  flex: 1,
+                  fontSize: "11px",
+                  color: "var(--text)",
+                }}
+              >
+                Action completed
+              </div>
+              <button
+                type="button"
+                onClick={() => setSnackbarVisible(false)}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  color: "var(--muted)",
+                  cursor: "pointer",
+                  padding: "2px",
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "14px",
+                }}
+                aria-label="Dismiss"
+              >
+                ✕
+              </button>
+            </div>
+          )}
         </div>
       ),
-      action: null,
+      action: { 
+        label: snackbarVisible ? "Dismiss" : "Replay", 
+        onClick: () => {
+          if (snackbarVisible) {
+            setSnackbarVisible(false);
+          } else {
+            setSnackbarKey((k) => k + 1);
+            setSnackbarVisible(true);
+          }
+        } 
+      },
     },
     {
       category: "route",
@@ -417,6 +457,58 @@ export default function AnimationsPage() {
         .hover-lift-demo:hover {
           transform: translateY(-4px);
           box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Reduced motion support */
+        [data-motion="reduced"] .press-demo:active,
+        [data-motion="reduced"] .press-demo {
+          transform: none !important;
+          transition: none !important;
+        }
+        
+        [data-motion="reduced"] .toggle .knob,
+        [data-motion="reduced"] .knob {
+          transition: none !important;
+        }
+        
+        [data-motion="reduced"] .stagger-box {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        
+        [data-motion="reduced"] .pulse {
+          animation: none !important;
+        }
+        
+        [data-motion="reduced"] .fade-up-demo {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        
+        [data-motion="reduced"] .hover-lift-demo:hover {
+          transform: none !important;
+        }
+        
+        [data-motion="reduced"] .layout {
+          transition: none !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .press-demo,
+          .press-demo:active,
+          .toggle .knob,
+          .knob,
+          .stagger-box,
+          .pulse,
+          .fade-up-demo,
+          .hover-lift-demo,
+          .layout {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+          }
         }
       `}</style>
     </main>
