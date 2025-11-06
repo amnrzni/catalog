@@ -30,6 +30,7 @@ export default function Pill({ children, active = false, onClick, className = ""
       onClick={onClick}
       className={className}
       role={onClick ? "button" : undefined}
+      aria-pressed={onClick ? active : undefined}
       tabIndex={onClick ? 0 : undefined}
       onKeyDown={onClick ? (e) => {
         if (e.key === "Enter") {

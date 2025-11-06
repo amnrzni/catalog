@@ -226,6 +226,7 @@ export default function UseCasesPage() {
                   View
                 </a>
                 <button
+                  type="button"
                   onClick={handleDismiss}
                   className="btn"
                   style={{
@@ -251,6 +252,7 @@ export default function UseCasesPage() {
             >
               <p>Banner is dismissed. Persisted across page reloads.</p>
               <button
+                type="button"
                 onClick={handleRestore}
                 className="btn"
                 style={{
@@ -445,6 +447,7 @@ export default function UseCasesPage() {
             {/* Code language switcher */}
             <div style={{ display: "flex", gap: "8px", marginTop: "16px" }}>
               <button
+                type="button"
                 onClick={() => setCodeLanguage("js")}
                 style={{
                   padding: "6px 12px",
@@ -460,6 +463,7 @@ export default function UseCasesPage() {
                 JavaScript
               </button>
               <button
+                type="button"
                 onClick={() => setCodeLanguage("ts")}
                 style={{
                   padding: "6px 12px",

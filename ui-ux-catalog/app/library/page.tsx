@@ -196,6 +196,7 @@ export default function LibraryPage() {
               </div>
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                 <button
+                  type="button"
                   className="btn-press-demo"
                   onClick={() => showToast("Button clicked!", "success")}
                   style={{
@@ -213,6 +214,7 @@ export default function LibraryPage() {
                   Primary
                 </button>
                 <button
+                  type="button"
                   onClick={() => showToast("Ghost button clicked", "info")}
                   className="btn-ghost-demo"
                   style={{
@@ -273,6 +275,7 @@ export default function LibraryPage() {
                 />
                 {inputValue && (
                   <button
+                    type="button"
                     onClick={() => setInputValue("")}
                     style={{
                       position: "absolute",
@@ -340,6 +343,7 @@ export default function LibraryPage() {
             <div>
               <h3 style={{ fontSize: "16px", margin: "0 0 12px" }}>Drawer / Sheet</h3>
               <button
+                type="button"
                 onClick={() => setDrawerOpen(true)}
                 style={{
                   padding: "0.65rem 1rem",
@@ -360,6 +364,7 @@ export default function LibraryPage() {
                     This drawer has focus trapping, ESC key handling, and backdrop click to close.
                   </p>
                   <button
+                    type="button"
                     onClick={() => setDrawerOpen(false)}
                     style={{
                       marginTop: "16px",
@@ -383,6 +388,7 @@ export default function LibraryPage() {
               <h3 style={{ fontSize: "16px", margin: "0 0 12px" }}>Toast Center</h3>
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                 <button
+                  type="button"
                   onClick={() => showToast("Success! Operation completed.", "success")}
                   style={{
                     padding: "0.65rem 1rem",
@@ -397,6 +403,7 @@ export default function LibraryPage() {
                   Success Toast
                 </button>
                 <button
+                  type="button"
                   onClick={() => showToast("Error! Something went wrong.", "error")}
                   style={{
                     padding: "0.65rem 1rem",
@@ -411,6 +418,7 @@ export default function LibraryPage() {
                   Error Toast
                 </button>
                 <button
+                  type="button"
                   onClick={() => showToast("Warning! Please check your input.", "warning")}
                   style={{
                     padding: "0.65rem 1rem",
@@ -425,6 +433,7 @@ export default function LibraryPage() {
                   Warning Toast
                 </button>
                 <button
+                  type="button"
                   onClick={() => showToast("Information: Press Cmd/Ctrl+K for command palette", "info")}
                   style={{
                     padding: "0.65rem 1rem",
