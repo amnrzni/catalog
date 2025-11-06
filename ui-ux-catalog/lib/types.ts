@@ -1,7 +1,7 @@
 // Core types for the catalog
 
 export type ComponentComplexity = 'Basic' | 'Intermediate' | 'Advanced';
-export type ComponentCategory = 'Button' | 'Input' | 'Card' | 'Navigation' | 'Data Display' | 'Feedback' | 'Layout' | '3D Objects' | 'Form' | 'Modal';
+export type ComponentCategory = 'Button' | 'Input' | 'Card' | 'Navigation' | 'Data Display' | 'Feedback' | 'Layout' | '3D Objects' | 'Form' | 'Modal' | 'Overlay' | 'Rich Content';
 export type ComponentFramework = 'React' | 'Vue' | 'HTML/CSS' | 'Angular';
 
 export interface ComponentMetadata {

@@ -17,45 +17,45 @@ export default function LibraryPage() {
       id: "navigation",
       title: "Navigation & Input",
       components: [
-        { name: "Command palette", desc: "Spotlight with keyboard shortcuts and groups" },
-        { name: "Breadcrumbs", desc: "Responsive truncation with ARIA" },
-        { name: "Segmented control", desc: "Tabs-like control with selection ring" },
+        { name: "Command palette", desc: "Spotlight with keyboard shortcuts and groups", slug: "command-palette" },
+        { name: "Breadcrumbs", desc: "Responsive truncation with ARIA", slug: "breadcrumbs" },
+        { name: "Segmented control", desc: "Tabs-like control with selection ring", slug: "segmented-control" },
       ],
     },
     {
       id: "forms",
       title: "Forms & Inputs",
       components: [
-        { name: "Combobox", desc: "Async search with typeahead" },
-        { name: "Date range", desc: "Keyboard navigable calendars" },
-        { name: "File uploader", desc: "Drag‑drop with image crop" },
+        { name: "Combobox", desc: "Async search with typeahead", slug: "combobox" },
+        { name: "Date range", desc: "Keyboard navigable calendars", slug: "date-range" },
+        { name: "File uploader", desc: "Drag‑drop with image crop", slug: "file-uploader" },
       ],
     },
     {
       id: "data",
       title: "Data display & tables",
       components: [
-        { name: "Data table", desc: "Pin/resize/sort/filter + virtualization" },
-        { name: "Timeline", desc: "Chronological events with badges" },
-        { name: "Tree view", desc: "Nested lists with keyboard support" },
+        { name: "Data table", desc: "Pin/resize/sort/filter + virtualization", slug: "data-table" },
+        { name: "Timeline", desc: "Chronological events with badges", slug: "timeline" },
+        { name: "Tree view", desc: "Nested lists with keyboard support", slug: "tree-view" },
       ],
     },
     {
       id: "overlays",
       title: "Overlays & feedback",
       components: [
-        { name: "Drawer / Sheet", desc: "Edge anchored with focus trapping" },
-        { name: "Popover / Menu", desc: "Alignment + collision handling" },
-        { name: "Toast center", desc: "Stacked notifications with queue" },
+        { name: "Drawer / Sheet", desc: "Edge anchored with focus trapping", slug: "drawer" },
+        { name: "Popover / Menu", desc: "Alignment + collision handling", slug: "popover" },
+        { name: "Toast center", desc: "Stacked notifications with queue", slug: "toast-center" },
       ],
     },
     {
       id: "rich",
       title: "Rich content",
       components: [
-        { name: "Code block", desc: "Syntax highlighting + copy button" },
-        { name: "Diff viewer", desc: "Side-by-side or unified" },
-        { name: "Rich text editor", desc: "Markdown-based with toolbar" },
+        { name: "Code block", desc: "Syntax highlighting + copy button", slug: "code-block" },
+        { name: "Diff viewer", desc: "Side-by-side or unified", slug: "diff-viewer" },
+        { name: "Rich text editor", desc: "Markdown-based with toolbar", slug: "rich-text-editor" },
       ],
     },
   ];
@@ -476,9 +476,9 @@ export default function LibraryPage() {
                 }}
               >
                 {category.components.map((comp, i) => (
-                  <a
+                  <Link
                     key={i}
-                    href="#"
+                    href={`/components/${comp.slug}`}
                     className="card"
                     style={{
                       background: "var(--surface)",
@@ -488,13 +488,15 @@ export default function LibraryPage() {
                       minHeight: "110px",
                       display: "block",
                       transition: "background 0.2s ease",
+                      textDecoration: "none",
+                      color: "inherit",
                     }}
                   >
                     <strong>{comp.name}</strong>
                     <p style={{ color: "var(--muted)", margin: "4px 0 0", fontSize: "14px" }}>
                       {comp.desc}
                     </p>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </Panel>
