@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Analytics - Minimalism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Minimalist Color Palette */
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-gray-50: #FAFAFA;
+            --color-gray-100: #F5F5F5;
+            --color-gray-200: #EEEEEE;
+            --color-gray-300: #E0E0E0;
+            --color-gray-400: #BDBDBD;
+            --color-gray-500: #9E9E9E;
+            --color-gray-600: #757575;
+            --color-gray-700: #616161;
+            --color-gray-800: #424242;
+            --color-gray-900: #212121;
+            
+            /* Single Accent Color */
+            --color-accent: #000000;
+            --color-accent-light: #333333;
+            
+            /* Spacing - Generous & Consistent */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 48px;
+            --space-xl: 64px;
+            --space-2xl: 96px;
+            --space-3xl: 128px;
+            
+            /* Typography */
+            --font-size-xs: 12px;
+            --font-size-sm: 14px;
+            --font-size-base: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 24px;
+            --font-size-2xl: 32px;
+            --font-size-3xl: 48px;
+            --font-size-4xl: 64px;
+            
+            /* Line Height */
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.75;
+            --line-height-loose: 2;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--color-white);
+            color: var(--color-black);
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-relaxed);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        /* Minimalist Header */
+        .header {
+            padding: var(--space-lg) 0;
+            border-bottom: 1px solid var(--color-gray-200);
+            background: var(--color-white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: fadeDown 0.8s ease-out;
+        }
+
+        @keyframes fadeDown {
+            from { 
+                opacity: 0; 
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: var(--font-size-lg);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--color-black);
+        }
+
+        .logo-sub {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-600);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--color-gray-700);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--color-black);
+        }
+
+        .nav-link.active {
+            color: var(--color-black);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--color-black);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 1px solid var(--color-gray-300);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: var(--font-size-base);
+            color: var(--color-black);
+        }
+
+        .icon-btn:hover {
+            border-color: var(--color-black);
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--color-black);
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--space-3xl) 0 var(--space-2xl);
+            animation: fadeIn 1s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            line-height: var(--line-height-tight);
+            margin-bottom: var(--space-md);
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--color-gray-600);
+            font-weight: 300;
+            line-height: var(--line-height-relaxed);
+            max-width: 600px;
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--color-gray-200);
+            margin: var(--space-xl) 0;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--color-gray-200);
+            border: 1px solid var(--color-gray-200);
+            margin-bottom: var(--space-xl);
+        }
+
+        .stat-card {
+            background: var(--color-white);
+            padding: var(--space-lg);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .stat-card:hover {
+            background: var(--color-gray-50);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+        }
+
+        .stat-icon {
+            font-size: var(--font-size-xl);
+            opacity: 0.6;
+        }
+
+        .stat-menu {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-400);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .stat-menu:hover {
+            color: var(--color-black);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+            font-weight: 400;
+        }
+
+        .stat-value {
+            font-size: var(--font-size-3xl);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-sm);
+            line-height: 1;
+        }
+
+        .stat-change {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-600);
+            font-weight: 300;
+        }
+
+        .stat-change.positive {
+            color: var(--color-black);
+        }
+
+        .stat-change.negative {
+            color: var(--color-gray-500);
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-header {
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-subtitle {
+            font-size: var(--font-size-base);
+            color: var(--color-gray-600);
+            font-weight: 300;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+        }
+
+        /* Card */
+        .card {
+            border: 1px solid var(--color-gray-200);
+            background: var(--color-white);
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            border-color: var(--color-black);
+        }
+
+        .card-header {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--color-gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: var(--font-size-lg);
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        /* Chart Placeholder */
+        .chart-placeholder {
+            background: var(--color-gray-50);
+            padding: var(--space-2xl) var(--space-lg);
+            text-align: center;
+            border: 1px solid var(--color-gray-200);
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .chart-icon {
+            font-size: 64px;
+            margin-bottom: var(--space-md);
+            opacity: 0.3;
+        }
+
+        .chart-text {
+            font-size: var(--font-size-base);
+            color: var(--color-gray-600);
+            font-weight: 300;
+        }
+
+        /* Activity List */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .activity-item {
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--color-gray-200);
+            display: flex;
+            gap: var(--space-md);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item:hover {
+            padding-left: var(--space-sm);
+        }
+
+        .activity-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-black);
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: var(--font-size-base);
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+
+        .activity-time {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-600);
+            font-weight: 300;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-sm);
+            font-weight: 400;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-sm) 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--color-gray-300);
+            font-size: var(--font-size-base);
+            font-family: 'Inter', sans-serif;
+            color: var(--color-black);
+            transition: border-color 0.3s;
+            font-weight: 300;
+        }
+
+        .form-input::placeholder {
+            color: var(--color-gray-400);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--color-black);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: var(--space-sm) var(--space-lg);
+            background: transparent;
+            border: 1px solid var(--color-black);
+            color: var(--color-black);
+            font-size: var(--font-size-sm);
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .btn-primary {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-white);
+            color: var(--color-black);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        /* Toggle */
+        .toggle-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .toggle-info {
+            flex: 1;
+        }
+
+        .toggle-title {
+            font-size: var(--font-size-base);
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+
+        .toggle-desc {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-600);
+            font-weight: 300;
+        }
+
+        .toggle {
+            width: 48px;
+            height: 24px;
+            background: var(--color-gray-300);
+            border: 1px solid var(--color-gray-400);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .toggle::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: var(--color-white);
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active {
+            background: var(--color-black);
+            border-color: var(--color-black);
+        }
+
+        .toggle.active::before {
+            left: 26px;
+        }
+
+        /* Slider */
+        .slider-wrapper {
+            padding: var(--space-lg) 0;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-md);
+        }
+
+        .slider-label {
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-gray-600);
+            font-weight: 400;
+        }
+
+        .slider-value {
+            font-size: var(--font-size-sm);
+            font-weight: 400;
+            color: var(--color-black);
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 1px;
+            background: var(--color-gray-300);
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--color-black);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--color-black);
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        /* Mini Cards */
+        .mini-card {
+            text-align: center;
+            padding: var(--space-xl) var(--space-lg);
+            border: 1px solid var(--color-gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .mini-card:hover {
+            border-color: var(--color-black);
+            background: var(--color-gray-50);
+        }
+
+        .mini-card-icon {
+            font-size: 40px;
+            margin-bottom: var(--space-md);
+            opacity: 0.6;
+        }
+
+        .mini-card-value {
+            font-size: var(--font-size-2xl);
+            font-weight: 300;
+            margin-bottom: var(--space-sm);
+            letter-spacing: -0.01em;
+        }
+
+        .mini-card-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--color-gray-200);
+            margin-bottom: var(--space-xl);
+        }
+
+        .tab {
+            padding: var(--space-md) var(--space-lg);
+            background: transparent;
+            border: none;
+            color: var(--color-gray-600);
+            font-size: var(--font-size-sm);
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .tab:hover {
+            color: var(--color-black);
+        }
+
+        .tab.active {
+            color: var(--color-black);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--color-black);
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--color-gray-200);
+            padding: var(--space-xl) 0;
+            margin-top: var(--space-3xl);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-600);
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--space-md);
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .stat-value {
+                font-size: var(--font-size-2xl);
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in-up {
+            animation: fadeIn 0.8s ease-out backwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Minimalist Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="logo">Aurora</div>
+                    <div class="logo-sub">Analytics</div>
+                </div>
+
+                <nav class="nav">
+                    <a href="#" class="nav-link active">Dashboard</a>
+                    <a href="#" class="nav-link">Analytics</a>
+                    <a href="#" class="nav-link">Reports</a>
+                    <a href="#" class="nav-link">Settings</a>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="icon-btn" style="position: relative;">
+                        🔍
+                    </button>
+                    <button class="icon-btn" style="position: relative;">
+                        🔔
+                        <span class="badge-dot"></span>
+                    </button>
+                    <button class="icon-btn">
+                        A
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">Good evening, amnrzni</h1>
+            <p class="hero-subtitle">Here's what's happening with your projects today. Monitor key metrics and insights with clarity.</p>
+        </section>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid fade-in-up delay-1">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-menu">⋯</div>
+                </div>
+                <div class="stat-label">Revenue</div>
+                <div class="stat-value">$124,580</div>
+                <div class="stat-change positive">↗ +12.3%</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-menu">⋯</div>
+                </div>
+                <div class="stat-label">Users</div>
+                <div class="stat-value">8,549</div>
+                <div class="stat-change positive">↗ +5.2%</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-menu">⋯</div>
+                </div>
+                <div class="stat-label">Growth</div>
+                <div class="stat-value">23.5%</div>
+                <div class="stat-change positive">↗ +2.1%</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-menu">⋯</div>
+                </div>
+                <div class="stat-label">Conversion</div>
+                <div class="stat-value">3.24%</div>
+                <div class="stat-change negative">↘ -0.8%</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Main Content -->
+        <div class="grid-2">
+            <div class="fade-in-up delay-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Performance Overview</div>
+                            <div style="font-size: 14px; color: var(--color-gray-600); margin-top: 4px; font-weight: 300;">Real-time analytics and metrics</div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn">Export</button>
+                            <button class="btn btn-primary">Details</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-placeholder">
+                            <div class="chart-icon">📊</div>
+                            <div class="chart-text">Chart Visualization</div>
+                            <div style="font-size: 14px; color: var(--color-gray-500); margin-top: 8px;">Interactive analytics</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fade-in-up delay-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Recent Activity</div>
+                        <button class="icon-btn">↻</button>
+                    </div>
+                    <div class="card-content">
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Payment received</div>
+                                    <div class="activity-time">2 mins ago</div>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">New user registered</div>
+                                    <div class="activity-time">5 mins ago</div>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Report generated</div>
+                                    <div class="activity-time">12 mins ago</div>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">System updated</div>
+                                    <div class="activity-time">25 mins ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Forms Section -->
+        <div class="grid-2">
+            <div class="fade-in-up delay-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Settings</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label class="form-label">Project Name</label>
+                            <input type="text" class="form-input" placeholder="Enter project name" value="Aurora Analytics">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-input" rows="3" placeholder="Add a description..." style="resize: vertical; border-bottom: 1px solid var(--color-gray-300); padding-top: 12px;"></textarea>
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary">Save Changes</button>
+                            <button class="btn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Preferences</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="toggle-wrapper">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Notifications</div>
+                                <div class="toggle-desc">Receive email notifications</div>
+                            </div>
+                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div class="toggle-wrapper">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Auto-save</div>
+                                <div class="toggle-desc">Automatically save changes</div>
+                            </div>
+                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div class="toggle-wrapper">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Dark Mode</div>
+                                <div class="toggle-desc">Use dark theme</div>
+                            </div>
+                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div class="slider-wrapper">
+                            <div class="slider-header">
+                                <div class="slider-label">Volume</div>
+                                <div class="slider-value" id="volumeValue">75%</div>
+                            </div>
+                            <input type="range" class="slider" min="0" max="100" value="75" oninput="document.getElementById('volumeValue').textContent = this.value + '%'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Overview Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Dashboard Overview</h2>
+                <p class="section-subtitle">Monitor your key metrics with real-time data through clean, minimal design that focuses on content and clarity.</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active">Overview</button>
+                <button class="tab">Analytics</button>
+                <button class="tab">Reports</button>
+                <button class="tab">Settings</button>
+            </div>
+
+            <div class="grid-3">
+                <div class="mini-card">
+                    <div class="mini-card-icon">📊</div>
+                    <div class="mini-card-value">1,247</div>
+                    <div class="mini-card-label">Total Views</div>
+                </div>
+
+                <div class="mini-card">
+                    <div class="mini-card-icon">💼</div>
+                    <div class="mini-card-value">42</div>
+                    <div class="mini-card-label">Projects</div>
+                </div>
+
+                <div class="mini-card">
+                    <div class="mini-card-icon">⭐</div>
+                    <div class="mini-card-value">98%</div>
+                    <div class="mini-card-label">Satisfaction</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-text">© 2025 Aurora Analytics. All rights reserved.</div>
+                <div class="footer-text">Designed with minimalism in mind.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Smooth scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

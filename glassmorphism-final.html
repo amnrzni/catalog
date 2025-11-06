@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Analytics - Clean Glassmorphism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Clean Glass System - Minimal & Refined */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-bg-strong: rgba(255, 255, 255, 0.12);
+            --glass-bg-light: rgba(255, 255, 255, 0.05);
+            
+            --border-glass: rgba(255, 255, 255, 0.18);
+            --border-glass-strong: rgba(255, 255, 255, 0.25);
+            --border-glass-light: rgba(255, 255, 255, 0.12);
+            
+            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --shadow-glass-strong: 0 12px 48px rgba(0, 0, 0, 0.3);
+            
+            /* Colors */
+            --accent-primary: #5B9FFF;
+            --accent-secondary: #A78BFA;
+            --accent-success: #34D399;
+            --accent-warning: #FBBF24;
+            --accent-danger: #F87171;
+            
+            /* Text */
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.70);
+            --text-tertiary: rgba(255, 255, 255, 0.45);
+            
+            /* Spacing - Consistent */
+            --space-xs: 6px;
+            --space-sm: 10px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            
+            /* Border Radius - Rounded but not excessive */
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* PHOTO BACKGROUND - The Key Element */
+        .photo-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .photo-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Subtle dark overlay to ensure text readability */
+        .photo-background::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.3) 0%, 
+                rgba(0, 0, 0, 0.2) 50%, 
+                rgba(0, 0, 0, 0.3) 100%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-lg);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Clean Navbar */
+        .navbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 14px 24px;
+            margin-bottom: var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-glass);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            font-size: 22px;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px;
+            border-radius: var(--radius-md);
+        }
+
+        .nav-tab {
+            padding: 8px 20px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-tab:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-tab.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-primary);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 8px 16px 8px 40px;
+            color: var(--text-primary);
+            width: 200px;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .search-box:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            width: 260px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            font-size: 16px;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 16px;
+            height: 16px;
+            padding: 0 4px;
+            background: #EF4444;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+        }
+
+        /* Welcome */
+        .welcome {
+            margin-bottom: var(--space-lg);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .welcome h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .col-3 { grid-column: span 3; }
+        .col-4 { grid-column: span 4; }
+        .col-6 { grid-column: span 6; }
+        .col-8 { grid-column: span 8; }
+        .col-12 { grid-column: span 12; }
+
+        /* Clean Glass Panel */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(60px) saturate(180%);
+            -webkit-backdrop-filter: blur(60px) saturate(180%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-glass);
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            background: var(--glass-bg-strong);
+            border-color: var(--border-glass-strong);
+            box-shadow: var(--shadow-glass-strong);
+        }
+
+        .glass-panel-strong {
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(80px) saturate(200%);
+        }
+
+        .glass-panel-light {
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(40px);
+            border-color: var(--border-glass-light);
+            box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .panel-subtitle {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(60px) saturate(180%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-glass);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: var(--glass-bg-strong);
+            border-color: var(--border-glass-strong);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glass-strong);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stat-icon {
+            font-size: 24px;
+        }
+
+        .stat-menu {
+            font-size: 18px;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+        }
+
+        .stat-change.positive {
+            color: var(--accent-success);
+        }
+
+        .stat-change.negative {
+            color: var(--accent-danger);
+        }
+
+        /* Forms */
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .form-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border: none;
+            box-shadow: 0 4px 12px rgba(91, 159, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 16px rgba(91, 159, 255, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Toggle */
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-primary);
+            border-color: transparent;
+        }
+
+        .toggle-switch.active::before {
+            left: 24px;
+        }
+
+        /* Tabs */
+        .tab-nav {
+            display: flex;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 10px 16px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .tab-button.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-primary);
+        }
+
+        /* Slider */
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(91, 159, 255, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .col-3, .col-4 { grid-column: span 6; }
+            .col-8 { grid-column: span 12; }
+        }
+
+        @media (max-width: 768px) {
+            .col-3, .col-4, .col-6, .col-8 { grid-column: span 12; }
+            .nav-center { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- PHOTO BACKGROUND -->
+    <div class="photo-background">
+        <img src="https://images.unsplash.com/photo-1762112800005-a61bacb1d15c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1972" 
+             alt="Background" 
+             loading="eager">
+    </div>
+
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span>Aurora</span>
+            </div>
+
+            <div class="nav-center">
+                <button class="nav-tab active">Dashboard</button>
+                <button class="nav-tab">Analytics</button>
+                <button class="nav-tab">Reports</button>
+                <button class="nav-tab">Settings</button>
+            </div>
+
+            <div class="nav-right">
+                <div style="position: relative;">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-box" placeholder="Search...">
+                </div>
+                <div class="icon-btn">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="icon-btn">⚙️</div>
+                <div class="icon-btn" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border: none;">
+                    A
+                </div>
+            </div>
+        </nav>
+
+        <!-- Welcome -->
+        <div class="welcome">
+            <h1>Good evening, amnrzni ✨</h1>
+            <p>Here's what's happening with your projects today</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid">
+            <div class="col-3">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-menu">⋯</div>
+                    </div>
+                    <div class="stat-label">Revenue</div>
+                    <div class="stat-value">$124,580</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+12.3%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-menu">⋯</div>
+                    </div>
+                    <div class="stat-label">Users</div>
+                    <div class="stat-value">8,549</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+5.2%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-menu">⋯</div>
+                    </div>
+                    <div class="stat-label">Growth</div>
+                    <div class="stat-value">+23.5%</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+2.1%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-menu">⋯</div>
+                    </div>
+                    <div class="stat-label">Conversion</div>
+                    <div class="stat-value">3.24%</div>
+                    <div class="stat-change negative">
+                        <span>↘</span>
+                        <span>-0.8%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid">
+            <div class="col-8">
+                <div class="glass-panel glass-panel-strong">
+                    <div class="panel-header">
+                        <div>
+                            <h3 class="panel-title">Performance Overview</h3>
+                            <p class="panel-subtitle">Real-time analytics and metrics</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn">Export</button>
+                            <button class="btn btn-primary">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-panel-light" style="padding: var(--space-xl); border-radius: var(--radius-md); min-height: 280px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 48px; margin-bottom: 12px;">📊</div>
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Chart Visualization</div>
+                            <div style="font-size: 13px; color: var(--text-secondary);">Interactive analytics</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="glass-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">Recent Activity</h3>
+                        <div class="icon-btn" style="width: 32px; height: 32px; font-size: 14px;">↻</div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div style="display: flex; gap: 12px; align-items: start;">
+                            <div style="width: 8px; height: 8px; background: var(--accent-success); border-radius: 50%; margin-top: 6px; box-shadow: 0 0 12px var(--accent-success);"></div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Payment received</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">2 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: start;">
+                            <div style="width: 8px; height: 8px; background: var(--accent-primary); border-radius: 50%; margin-top: 6px; box-shadow: 0 0 12px var(--accent-primary);"></div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">New user registered</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">5 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: start;">
+                            <div style="width: 8px; height: 8px; background: var(--accent-secondary); border-radius: 50%; margin-top: 6px; box-shadow: 0 0 12px var(--accent-secondary);"></div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Report generated</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">12 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: start;">
+                            <div style="width: 8px; height: 8px; background: var(--accent-warning); border-radius: 50%; margin-top: 6px; box-shadow: 0 0 12px var(--accent-warning);"></div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">System updated</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">25 mins ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forms -->
+        <div class="grid">
+            <div class="col-6">
+                <div class="glass-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">Settings</h3>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <label class="form-label">Project Name</label>
+                        <input type="text" class="form-input" placeholder="Enter project name" value="Aurora Analytics">
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-input" rows="3" placeholder="Add a description..." style="resize: vertical;"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary">Save Changes</button>
+                        <button class="btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="glass-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">Preferences</h3>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Notifications</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">Receive email notifications</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Auto-save</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">Automatically save changes</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Dark Mode</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">Use dark theme</div>
+                            </div>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <label class="form-label" style="margin: 0;">Volume</label>
+                                <span style="font-size: 13px; font-weight: 700; color: var(--accent-primary);" id="volumeValue">75%</span>
+                            </div>
+                            <input type="range" class="slider" min="0" max="100" value="75" oninput="document.getElementById('volumeValue').textContent = this.value + '%'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="grid">
+            <div class="col-12">
+                <div class="glass-panel">
+                    <div class="tab-nav">
+                        <button class="tab-button active">Overview</button>
+                        <button class="tab-button">Analytics</button>
+                        <button class="tab-button">Reports</button>
+                        <button class="tab-button">Settings</button>
+                    </div>
+
+                    <div style="padding: var(--space-lg); background: rgba(255, 255, 255, 0.04); border-radius: var(--radius-md);">
+                        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Dashboard Overview</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
+                            Monitor your key metrics with real-time data through beautifully translucent glass panels.
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); text-align: center;">
+                                <div style="font-size: 24px; margin-bottom: 8px;">📊</div>
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 4px;">1,247</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">Total Views</div>
+                            </div>
+                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); text-align: center;">
+                                <div style="font-size: 24px; margin-bottom: 8px;">💼</div>
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 4px;">42</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">Projects</div>
+                            </div>
+                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); text-align: center;">
+                                <div style="font-size: 24px; margin-bottom: 8px;">⭐</div>
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 4px;">98%</div>
+                                <div style="font-size: 12px; color: var(--text-tertiary);">Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

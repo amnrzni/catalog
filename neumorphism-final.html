@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Analytics - Premium Neumorphism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light Mode Neumorphism */
+            --bg-primary: #E6EBF0;
+            --bg-secondary: #D1D9E6;
+            --bg-tertiary: #F0F4F8;
+            
+            /* Shadows - The Heart of Neumorphism */
+            --shadow-light: #FFFFFF;
+            --shadow-dark: rgba(163, 177, 198, 0.6);
+            
+            /* Neumorphic Shadow Combinations */
+            --shadow-outset: 
+                8px 8px 16px var(--shadow-dark),
+                -8px -8px 16px var(--shadow-light);
+            
+            --shadow-outset-strong: 
+                12px 12px 24px var(--shadow-dark),
+                -12px -12px 24px var(--shadow-light);
+            
+            --shadow-inset: 
+                inset 4px 4px 8px var(--shadow-dark),
+                inset -4px -4px 8px var(--shadow-light);
+            
+            --shadow-inset-strong: 
+                inset 6px 6px 12px var(--shadow-dark),
+                inset -6px -6px 12px var(--shadow-light);
+            
+            /* Accent Colors */
+            --accent-primary: #5B9FFF;
+            --accent-secondary: #A78BFA;
+            --accent-success: #34D399;
+            --accent-warning: #FBBF24;
+            --accent-danger: #F87171;
+            --accent-cyan: #22D3EE;
+            
+            /* Text Colors */
+            --text-primary: #2D3748;
+            --text-secondary: #4A5568;
+            --text-tertiary: #718096;
+            --text-light: #A0AEC0;
+            
+            /* Spacing */
+            --space-xs: 6px;
+            --space-sm: 10px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            
+            /* Border Radius - Soft & Rounded */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-full: 50%;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            color: var(--text-primary);
+            padding: var(--space-lg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Neumorphic Navbar */
+        .navbar {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: 16px 24px;
+            margin-bottom: var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-outset);
+            animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes slideDown {
+            from { 
+                transform: translateY(-30px); 
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0); 
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: var(--shadow-outset);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-primary);
+            padding: 8px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-inset);
+        }
+
+        .nav-tab {
+            padding: 10px 24px;
+            background: var(--bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: 'Poppins', sans-serif;
+            box-shadow: none;
+        }
+
+        .nav-tab:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-tab.active {
+            color: var(--accent-primary);
+            box-shadow: var(--shadow-outset);
+            transform: translateY(-1px);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-box-wrapper {
+            position: relative;
+        }
+
+        .search-box {
+            background: var(--bg-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 10px 16px 10px 44px;
+            color: var(--text-primary);
+            width: 220px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: var(--shadow-inset);
+            transition: all 0.3s ease;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-light);
+        }
+
+        .search-box:focus {
+            outline: none;
+            width: 280px;
+            box-shadow: var(--shadow-inset-strong);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .neo-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-primary);
+            border: none;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 18px;
+            box-shadow: var(--shadow-outset);
+            position: relative;
+        }
+
+        .neo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-outset-strong);
+        }
+
+        .neo-btn:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-inset);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            background: linear-gradient(135deg, #EF4444, #DC2626);
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+        }
+
+        .neo-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: var(--shadow-outset);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .neo-avatar:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-outset-strong);
+        }
+
+        /* Welcome Section */
+        .welcome {
+            margin-bottom: var(--space-lg);
+            animation: fadeIn 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .col-3 { grid-column: span 3; }
+        .col-4 { grid-column: span 4; }
+        .col-6 { grid-column: span 6; }
+        .col-8 { grid-column: span 8; }
+        .col-12 { grid-column: span 12; }
+
+        /* Premium Neumorphic Stat Cards */
+        .stat-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-outset);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: fadeIn 0.6s ease-out backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-outset-strong);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: var(--shadow-inset);
+        }
+
+        .stat-icon.primary { color: var(--accent-primary); }
+        .stat-icon.success { color: var(--accent-success); }
+        .stat-icon.warning { color: var(--accent-warning); }
+        .stat-icon.cyan { color: var(--accent-cyan); }
+
+        .stat-menu {
+            width: 32px;
+            height: 32px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            box-shadow: var(--shadow-outset);
+            transition: all 0.2s ease;
+            font-size: 18px;
+        }
+
+        .stat-menu:active {
+            box-shadow: var(--shadow-inset);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .stat-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 14px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-inset);
+        }
+
+        .stat-change.positive { color: var(--accent-success); }
+        .stat-change.negative { color: var(--accent-danger); }
+
+        /* Neumorphic Panels */
+        .neo-panel {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-outset);
+            transition: all 0.3s ease;
+        }
+
+        .neo-panel:hover {
+            box-shadow: var(--shadow-outset-strong);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .panel-subtitle {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .panel-inset {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-inset);
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Premium Buttons */
+        .btn {
+            padding: 12px 24px;
+            background: var(--bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: 'Poppins', sans-serif;
+            box-shadow: var(--shadow-outset);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-outset-strong);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-inset);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            box-shadow: 
+                8px 8px 16px rgba(91, 159, 255, 0.3),
+                -8px -8px 16px rgba(167, 139, 250, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 
+                12px 12px 24px rgba(91, 159, 255, 0.4),
+                -12px -12px 24px rgba(167, 139, 250, 0.4);
+        }
+
+        .btn-primary:active {
+            box-shadow: 
+                inset 6px 6px 12px rgba(91, 159, 255, 0.5),
+                inset -6px -6px 12px rgba(167, 139, 250, 0.5);
+        }
+
+        /* Forms */
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: var(--shadow-inset);
+            transition: all 0.3s ease;
+        }
+
+        .form-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: var(--shadow-inset-strong);
+        }
+
+        /* Premium Toggle Switch */
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 56px;
+            height: 28px;
+            background: var(--bg-primary);
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--shadow-inset);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: var(--bg-primary);
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: var(--shadow-outset);
+        }
+
+        .toggle-switch.active {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            box-shadow: 
+                inset 4px 4px 8px rgba(91, 159, 255, 0.3),
+                inset -4px -4px 8px rgba(167, 139, 250, 0.3);
+        }
+
+        .toggle-switch.active::before {
+            left: 31px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(91, 159, 255, 0.5);
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-primary);
+            padding: 8px;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            box-shadow: var(--shadow-inset);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px 20px;
+            background: var(--bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: 'Poppins', sans-serif;
+            box-shadow: none;
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-button.active {
+            color: var(--accent-primary);
+            box-shadow: var(--shadow-outset);
+            transform: translateY(-1px);
+        }
+
+        /* Premium Slider */
+        .slider-wrapper {
+            width: 100%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            outline: none;
+            box-shadow: var(--shadow-inset);
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(91, 159, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(91, 159, 255, 0.6);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 12px rgba(91, 159, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        /* Activity Feed */
+        .activity-item {
+            display: flex;
+            gap: 14px;
+            align-items: start;
+            padding: 14px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-outset);
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        .activity-item:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-outset-strong);
+        }
+
+        .activity-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-top: 4px;
+            box-shadow: 0 0 20px currentColor;
+            flex-shrink: 0;
+        }
+
+        .activity-dot.success { 
+            background: var(--accent-success);
+            color: var(--accent-success);
+        }
+
+        .activity-dot.primary { 
+            background: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .activity-dot.secondary { 
+            background: var(--accent-secondary);
+            color: var(--accent-secondary);
+        }
+
+        .activity-dot.warning { 
+            background: var(--accent-warning);
+            color: var(--accent-warning);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        /* Setting Items */
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-outset);
+            transition: all 0.3s ease;
+            margin-bottom: 14px;
+        }
+
+        .setting-item:hover {
+            box-shadow: var(--shadow-outset-strong);
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .setting-desc {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        /* Mini Stats */
+        .mini-stat {
+            padding: 24px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            box-shadow: var(--shadow-inset);
+            transition: all 0.3s ease;
+        }
+
+        .mini-stat:hover {
+            box-shadow: var(--shadow-inset-strong);
+            transform: scale(1.02);
+        }
+
+        .mini-stat-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .mini-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .mini-stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .col-3, .col-4 { grid-column: span 6; }
+            .col-8 { grid-column: span 12; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: var(--space-md); }
+            .col-3, .col-4, .col-6, .col-8 { grid-column: span 12; }
+            .nav-center { display: none; }
+            .search-box { width: 180px; }
+            .search-box:focus { width: 220px; }
+        }
+
+        /* Scroll Enhancement */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+            border-radius: 6px;
+            box-shadow: var(--shadow-inset);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            box-shadow: var(--shadow-outset);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-tertiary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Premium Neumorphic Navbar -->
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <span>Aurora</span>
+            </div>
+
+            <div class="nav-center">
+                <button class="nav-tab active">Dashboard</button>
+                <button class="nav-tab">Analytics</button>
+                <button class="nav-tab">Reports</button>
+                <button class="nav-tab">Settings</button>
+            </div>
+
+            <div class="nav-right">
+                <div class="search-box-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-box" placeholder="Search...">
+                </div>
+                <button class="neo-btn">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="neo-btn">⚙️</button>
+                <div class="neo-avatar">A</div>
+            </div>
+        </nav>
+
+        <!-- Welcome Section -->
+        <div class="welcome">
+            <h1>Good evening, amnrzni ✨</h1>
+            <p>Here's what's happening with your projects today</p>
+        </div>
+
+        <!-- Premium Stat Cards -->
+        <div class="grid">
+            <div class="col-3">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon primary">💰</div>
+                        <div class="stat-menu">⋯</div>
+                    </div>
+                    <div class="stat-label">Revenue</div>
+                    <div class="stat-value">$124,580</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+12.3%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon success">👥</div>
+                        <div class="stat-menu">⋯</div>
+                    </div>
+                    <div class="stat-label">Users</div>
+                    <div class="stat-value">8,549</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+5.2%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon warning">📈</div>
+                        <div class="stat-menu">⋯</div>
+                    </div>
+                    <div class="stat-label">Growth</div>
+                    <div class="stat-value">+23.5%</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+2.1%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon cyan">🎯</div>
+                        <div class="stat-menu">⋯</div>
+                    </div>
+                    <div class="stat-label">Conversion</div>
+                    <div class="stat-value">3.24%</div>
+                    <div class="stat-change negative">
+                        <span>↘</span>
+                        <span>-0.8%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid">
+            <div class="col-8">
+                <div class="neo-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3 class="panel-title">Performance Overview</h3>
+                            <p class="panel-subtitle">Real-time analytics and metrics</p>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="btn">Export</button>
+                            <button class="btn btn-primary">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-inset">
+                        <div style="text-align: center;">
+                            <div style="font-size: 56px; margin-bottom: 16px;">📊</div>
+                            <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Chart Visualization</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Interactive analytics dashboard</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="neo-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">Recent Activity</h3>
+                        <button class="neo-btn" style="width: 36px; height: 36px; font-size: 16px;">↻</button>
+                    </div>
+
+                    <div>
+                        <div class="activity-item">
+                            <div class="activity-dot success"></div>
+                            <div class="activity-content">
+                                <div class="activity-title">Payment received</div>
+                                <div class="activity-time">2 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-dot primary"></div>
+                            <div class="activity-content">
+                                <div class="activity-title">New user registered</div>
+                                <div class="activity-time">5 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-dot secondary"></div>
+                            <div class="activity-content">
+                                <div class="activity-title">Report generated</div>
+                                <div class="activity-time">12 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-dot warning"></div>
+                            <div class="activity-content">
+                                <div class="activity-title">System updated</div>
+                                <div class="activity-time">25 mins ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forms Section -->
+        <div class="grid">
+            <div class="col-6">
+                <div class="neo-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">Settings</h3>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label class="form-label">Project Name</label>
+                        <input type="text" class="form-input" placeholder="Enter project name" value="Aurora Analytics">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-input" rows="3" placeholder="Add a description..." style="resize: vertical;"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn btn-primary">Save Changes</button>
+                        <button class="btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="neo-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">Preferences</h3>
+                    </div>
+
+                    <div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Notifications</div>
+                                <div class="setting-desc">Receive email notifications</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Auto-save</div>
+                                <div class="setting-desc">Automatically save changes</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Dark Mode</div>
+                                <div class="setting-desc">Use dark theme</div>
+                            </div>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div style="padding: 16px; background: var(--bg-primary); border-radius: var(--radius-sm); box-shadow: var(--shadow-outset);">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                <label class="form-label" style="margin: 0;">Volume</label>
+                                <span style="font-size: 14px; font-weight: 700; color: var(--accent-primary);" id="volumeValue">75%</span>
+                            </div>
+                            <input type="range" class="slider" min="0" max="100" value="75" oninput="document.getElementById('volumeValue').textContent = this.value + '%'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="grid">
+            <div class="col-12">
+                <div class="neo-panel">
+                    <div class="tab-nav">
+                        <button class="tab-button active">Overview</button>
+                        <button class="tab-button">Analytics</button>
+                        <button class="tab-button">Reports</button>
+                        <button class="tab-button">Settings</button>
+                    </div>
+
+                    <div class="panel-inset" style="min-height: auto; padding: var(--space-lg);">
+                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 14px; color: var(--text-primary);">Dashboard Overview</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--space-lg); font-weight: 500;">
+                            Monitor your key metrics with real-time data through beautifully soft, tactile neumorphic design elements that provide a premium, luxurious interface experience.
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                            <div class="mini-stat">
+                                <div class="mini-stat-icon">📊</div>
+                                <div class="mini-stat-value">1,247</div>
+                                <div class="mini-stat-label">Total Views</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-icon">💼</div>
+                                <div class="mini-stat-value">42</div>
+                                <div class="mini-stat-label">Projects</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-icon">⭐</div>
+                                <div class="mini-stat-value">98%</div>
+                                <div class="mini-stat-label">Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Nav Tabs
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Add subtle hover sound effect simulation (visual feedback)
+        document.querySelectorAll('.neo-btn, .btn, .stat-card').forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+        });
+    </script>
+</body>
+</html>
