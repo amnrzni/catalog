@@ -1,19 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import dynamic from "next/dynamic";
 import Panel from "@/components/ui/Panel";
 import CopyButton from "@/components/ui/CopyButton";
 import { useToast } from "@/components/ui/ToastCenter";
-
-// Dynamic import of Recharts with SSR disabled
-const LineChart = dynamic(() => import("recharts").then((mod) => mod.LineChart), { ssr: false });
-const Line = dynamic(() => import("recharts").then((mod) => mod.Line), { ssr: false });
-const XAxis = dynamic(() => import("recharts").then((mod) => mod.XAxis), { ssr: false });
-const YAxis = dynamic(() => import("recharts").then((mod) => mod.YAxis), { ssr: false });
-const CartesianGrid = dynamic(() => import("recharts").then((mod) => mod.CartesianGrid), { ssr: false });
-const Tooltip = dynamic(() => import("recharts").then((mod) => mod.Tooltip), { ssr: false });
-const ResponsiveContainer = dynamic(() => import("recharts").then((mod) => mod.ResponsiveContainer), { ssr: false });
+import { RevenueChart } from "@/components/ui/Chart";
 
 const STORAGE_KEY = "catalog.announceDismissed";
 
@@ -414,36 +405,7 @@ export default function UseCasesPage() {
           <div style={{ marginBottom: "20px" }}>
             <h4 style={{ margin: "0 0 12px" }}>Revenue Trend</h4>
             <div style={{ width: "100%", height: "300px" }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-                  <XAxis 
-                    dataKey="month" 
-                    stroke="var(--muted)"
-                    style={{ fontSize: "12px" }}
-                  />
-                  <YAxis 
-                    stroke="var(--muted)"
-                    style={{ fontSize: "12px" }}
-                  />
-                  <Tooltip 
-                    contentStyle={{
-                      background: "var(--surface-2)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "8px",
-                      color: "var(--text)",
-                    }}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="value" 
-                    stroke="var(--accent)" 
-                    strokeWidth={2}
-                    dot={{ fill: "var(--accent)", r: 4 }}
-                    activeDot={{ r: 6 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+              <RevenueChart data={chartData} />
             </div>
           </div>
 
