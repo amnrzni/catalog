@@ -1,11 +1,37 @@
-# Root level gitignore
-# The main project is in ui-ux-catalog/ with its own .gitignore
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Root package-lock.json (workspace manages dependencies)
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 package-lock.json
 
-# Node modules at root (workspace manages dependencies)
-node_modules/
+# testing
+/coverage
 
-# Vercel
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
 .vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
