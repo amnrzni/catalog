@@ -56,6 +56,9 @@ const fileMappings = {
   'components.glassmorphism.Button.animations.ts': 'components/glassmorphism/Button/animations.ts',
   'components.glassmorphism.Card.index.tsx': 'components/glassmorphism/Card/index.tsx',
   'components.glassmorphism.Input.index.tsx': 'components/glassmorphism/Input/index.tsx',
+  'components.glassmorphism.Toggle.index.tsx': 'components/glassmorphism/Toggle/index.tsx',
+  'components.glassmorphism.Slider.index.tsx': 'components/glassmorphism/Slider/index.tsx',
+  'components.glassmorphism.Tabs.index.tsx': 'components/glassmorphism/Tabs/index.tsx',
 };
 
 // Create directories
