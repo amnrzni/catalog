@@ -418,6 +418,58 @@ export default function AnimationsPage() {
           transform: translateY(-4px);
           box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
         }
+
+        /* Reduced motion support */
+        [data-motion="reduced"] .press-demo:active,
+        [data-motion="reduced"] .press-demo {
+          transform: none !important;
+          transition: none !important;
+        }
+        
+        [data-motion="reduced"] .toggle .knob,
+        [data-motion="reduced"] .knob {
+          transition: none !important;
+        }
+        
+        [data-motion="reduced"] .stagger-box {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        
+        [data-motion="reduced"] .pulse {
+          animation: none !important;
+        }
+        
+        [data-motion="reduced"] .fade-up-demo {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        
+        [data-motion="reduced"] .hover-lift-demo:hover {
+          transform: none !important;
+        }
+        
+        [data-motion="reduced"] .layout {
+          transition: none !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .press-demo,
+          .press-demo:active,
+          .toggle .knob,
+          .knob,
+          .stagger-box,
+          .pulse,
+          .fade-up-demo,
+          .hover-lift-demo,
+          .layout {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+          }
+        }
       `}</style>
     </main>
   );
