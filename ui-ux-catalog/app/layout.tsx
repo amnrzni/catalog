@@ -4,6 +4,7 @@ import "../styles/animations.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import GlobalProviders from "@/components/layout/GlobalProviders";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -116,6 +117,44 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        {/* Early hydration script to avoid FOUC */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const ACCENT_MAP = {
+                    purple: '#a78bfa',
+                    blue: '#60a5fa',
+                    teal: '#22d3ee',
+                    pink: '#fb5fb1',
+                    yellow: '#ffd60a',
+                    orange: '#ff8c3a',
+                    lime: '#84cc16'
+                  };
+                  
+                  // Read from localStorage
+                  const accent = localStorage.getItem('catalog.accent') || 'purple';
+                  const focus = localStorage.getItem('catalog.focus') || 'ring';
+                  const motion = localStorage.getItem('catalog.motion') || 'base';
+                  const contrast = localStorage.getItem('catalog.contrast') || 'normal';
+                  
+                  // Apply accent color
+                  if (ACCENT_MAP[accent]) {
+                    document.documentElement.style.setProperty('--accent', ACCENT_MAP[accent]);
+                  }
+                  
+                  // Apply data attributes to body (will be applied once body is available)
+                  document.addEventListener('DOMContentLoaded', function() {
+                    document.body.setAttribute('data-focus', focus);
+                    document.body.setAttribute('data-motion', motion);
+                    document.body.setAttribute('data-contrast', contrast);
+                  });
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -136,19 +175,21 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <ThemeProvider>
-          {/* Skip to main content link for accessibility */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:rounded-xl"
-            style={{ background: "var(--accent)", color: "var(--bg)" }}
-          >
-            Skip to main content
-          </a>
-          <Header />
-          <main id="main-content" className="min-h-screen" tabIndex={-1}>
-            {children}
-          </main>
-          <Footer />
+          <GlobalProviders>
+            {/* Skip to main content link for accessibility */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:rounded-xl"
+              style={{ background: "var(--accent)", color: "var(--bg)" }}
+            >
+              Skip to main content
+            </a>
+            <Header />
+            <main id="main-content" className="min-h-screen" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
+          </GlobalProviders>
         </ThemeProvider>
       </body>
     </html>

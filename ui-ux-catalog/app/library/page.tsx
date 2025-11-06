@@ -1,9 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Panel from "@/components/ui/Panel";
+import CopyButton from "@/components/ui/CopyButton";
+import SegmentedControl from "@/components/ui/SegmentedControl";
+import Drawer from "@/components/ui/Drawer";
+import { useToast } from "@/components/ui/ToastCenter";
 
 export default function LibraryPage() {
+  const [inputValue, setInputValue] = useState("");
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const { showToast } = useToast();
   const componentCategories = [
     {
       id: "navigation",
@@ -136,7 +144,10 @@ export default function LibraryPage() {
 
         {/* Quick install panel */}
         <Panel>
-          <h3 style={{ margin: "0 0 8px" }}>Quick install</h3>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+            <h3 style={{ margin: 0 }}>Quick install</h3>
+            <CopyButton value="npm install @catalog/ui" />
+          </div>
           <div
             style={{
               fontFamily: "ui-monospace, Menlo, Consolas, monospace",
@@ -185,6 +196,8 @@ export default function LibraryPage() {
               </div>
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                 <button
+                  className="btn-press-demo"
+                  onClick={() => showToast("Button clicked!", "success")}
                   style={{
                     padding: "0.5rem 0.8rem",
                     borderRadius: "999px",
@@ -193,11 +206,15 @@ export default function LibraryPage() {
                     color: "var(--bg)",
                     fontSize: "13px",
                     fontWeight: 600,
+                    cursor: "pointer",
+                    transition: "transform 0.08s ease, filter 0.15s ease",
                   }}
                 >
                   Primary
                 </button>
                 <button
+                  onClick={() => showToast("Ghost button clicked", "info")}
+                  className="btn-ghost-demo"
                   style={{
                     padding: "0.5rem 0.8rem",
                     borderRadius: "999px",
@@ -205,6 +222,8 @@ export default function LibraryPage() {
                     border: "1px solid rgba(255, 255, 255, 0.08)",
                     color: "var(--text)",
                     fontSize: "13px",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease",
                   }}
                 >
                   Ghost
@@ -236,18 +255,44 @@ export default function LibraryPage() {
               >
                 Inputs
               </div>
-              <input
-                placeholder="Search…"
-                style={{
-                  width: "100%",
-                  padding: "0.7rem 0.9rem",
-                  borderRadius: "10px",
-                  border: "1px solid var(--border)",
-                  background: "#0f1015",
-                  color: "var(--text)",
-                  fontSize: "13px",
-                }}
-              />
+              <div style={{ position: "relative" }}>
+                <input
+                  placeholder="Type here…"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  style={{
+                    width: "100%",
+                    padding: "0.7rem 0.9rem",
+                    paddingRight: inputValue ? "35px" : "0.9rem",
+                    borderRadius: "10px",
+                    border: "1px solid var(--border)",
+                    background: "#0f1015",
+                    color: "var(--text)",
+                    fontSize: "13px",
+                  }}
+                />
+                {inputValue && (
+                  <button
+                    onClick={() => setInputValue("")}
+                    style={{
+                      position: "absolute",
+                      right: "8px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      background: "transparent",
+                      border: "none",
+                      color: "var(--muted)",
+                      cursor: "pointer",
+                      padding: "4px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                    aria-label="Clear input"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
             </div>
             <div
               className="card"
@@ -274,37 +319,130 @@ export default function LibraryPage() {
               >
                 Tabs
               </div>
+              <SegmentedControl
+                tabs={[
+                  { id: "overview", label: "Overview", content: <div style={{ fontSize: "13px", color: "var(--muted)" }}>Overview content</div> },
+                  { id: "details", label: "Details", content: <div style={{ fontSize: "13px", color: "var(--muted)" }}>Details content</div> },
+                ]}
+              />
+            </div>
+          </div>
+        </Panel>
+      </div>
+
+      {/* Live Interactive Demos */}
+      <section style={{ marginTop: "40px" }}>
+        <Panel>
+          <h2 style={{ margin: "0 0 16px" }}>Live Interactive Demos</h2>
+          
+          <div style={{ display: "grid", gap: "24px" }}>
+            {/* Drawer Demo */}
+            <div>
+              <h3 style={{ fontSize: "16px", margin: "0 0 12px" }}>Drawer / Sheet</h3>
+              <button
+                onClick={() => setDrawerOpen(true)}
+                style={{
+                  padding: "0.65rem 1rem",
+                  borderRadius: "999px",
+                  background: "var(--accent)",
+                  border: "none",
+                  color: "var(--bg)",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                }}
+              >
+                Open Drawer
+              </button>
+              <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)}>
+                <div style={{ padding: "var(--space-6)" }}>
+                  <h2 style={{ margin: "0 0 16px" }}>Drawer Content</h2>
+                  <p style={{ color: "var(--muted)", lineHeight: 1.6 }}>
+                    This drawer has focus trapping, ESC key handling, and backdrop click to close.
+                  </p>
+                  <button
+                    onClick={() => setDrawerOpen(false)}
+                    style={{
+                      marginTop: "16px",
+                      padding: "0.65rem 1rem",
+                      borderRadius: "999px",
+                      background: "var(--accent)",
+                      border: "none",
+                      color: "var(--bg)",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
+              </Drawer>
+            </div>
+
+            {/* Toast Demo */}
+            <div>
+              <h3 style={{ fontSize: "16px", margin: "0 0 12px" }}>Toast Center</h3>
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                 <button
+                  onClick={() => showToast("Success! Operation completed.", "success")}
                   style={{
-                    padding: "0.5rem 0.8rem",
+                    padding: "0.65rem 1rem",
+                    borderRadius: "999px",
+                    background: "#84cc16",
+                    border: "none",
+                    color: "var(--bg)",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  Success Toast
+                </button>
+                <button
+                  onClick={() => showToast("Error! Something went wrong.", "error")}
+                  style={{
+                    padding: "0.65rem 1rem",
+                    borderRadius: "999px",
+                    background: "#ef4444",
+                    border: "none",
+                    color: "white",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  Error Toast
+                </button>
+                <button
+                  onClick={() => showToast("Warning! Please check your input.", "warning")}
+                  style={{
+                    padding: "0.65rem 1rem",
+                    borderRadius: "999px",
+                    background: "#ffd60a",
+                    border: "none",
+                    color: "var(--bg)",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  Warning Toast
+                </button>
+                <button
+                  onClick={() => showToast("Information: Press Cmd/Ctrl+K for command palette", "info")}
+                  style={{
+                    padding: "0.65rem 1rem",
                     borderRadius: "999px",
                     background: "var(--accent)",
                     border: "none",
                     color: "var(--bg)",
-                    fontSize: "13px",
                     fontWeight: 600,
+                    cursor: "pointer",
                   }}
                 >
-                  Overview
-                </button>
-                <button
-                  style={{
-                    padding: "0.5rem 0.8rem",
-                    borderRadius: "999px",
-                    background: "transparent",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    color: "var(--text)",
-                    fontSize: "13px",
-                  }}
-                >
-                  Details
+                  Info Toast
                 </button>
               </div>
             </div>
           </div>
         </Panel>
-      </div>
+      </section>
 
       {/* Component Categories */}
       <div
@@ -363,13 +501,35 @@ export default function LibraryPage() {
         .btn-ghost:hover {
           background: rgba(255, 255, 255, 0.05);
         }
+        
+        .btn-press-demo:active {
+          transform: scale(0.95);
+        }
+        
+        .btn-press-demo:hover {
+          filter: brightness(1.1);
+        }
+        
+        .btn-ghost-demo:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.15);
+        }
+        
         .card:hover {
           background: color-mix(in oklab, var(--surface) 95%, var(--accent)) !important;
         }
+        
         @media (max-width: 1000px) {
           .header-grid {
             grid-template-columns: 1fr !important;
           }
+        }
+        
+        [data-motion="reduced"] .btn-press-demo,
+        [data-motion="reduced"] .btn-ghost-demo,
+        [data-motion="reduced"] .btn-primary {
+          transition: none !important;
+          transform: none !important;
         }
       `}</style>
     </main>

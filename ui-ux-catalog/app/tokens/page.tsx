@@ -37,6 +37,36 @@ export default function TokensPage() {
     { name: "shadow.3", value: "inset + deep", shadow: "0 1px 0 rgba(255,255,255,.04) inset, 0 20px 60px rgba(0,0,0,.65)" },
   ];
 
+  const borderTokens = [
+    { name: "border.1", value: "1px" },
+    { name: "border.2", value: "2px" },
+    { name: "border.3", value: "3px" },
+  ];
+
+  const opacityTokens = [
+    { name: "opacity.1", value: "0.08" },
+    { name: "opacity.2", value: "0.14" },
+    { name: "opacity.3", value: "0.22" },
+  ];
+
+  const zIndexTokens = [
+    { name: "z.base", value: "0" },
+    { name: "z.dropdown", value: "10" },
+    { name: "z.sticky", value: "20" },
+    { name: "z.overlay", value: "30" },
+    { name: "z.modal", value: "40" },
+    { name: "z.toast", value: "50" },
+  ];
+
+  const motionTokens = [
+    { name: "duration.fast", value: "150ms" },
+    { name: "duration.normal", value: "200ms" },
+    { name: "duration.medium", value: "300ms" },
+    { name: "duration.slow", value: "450ms" },
+    { name: "ease.out", value: "cubic-bezier(0.22, 1, 0.36, 1)" },
+    { name: "ease.in-out", value: "cubic-bezier(0.65, 0, 0.35, 1)" },
+  ];
+
   return (
     <main className="container" style={{ paddingBottom: "80px" }}>
       <h1
@@ -240,6 +270,202 @@ export default function TokensPage() {
                   border: "1px solid rgba(255, 255, 255, 0.08)",
                   background: "#0f1117",
                   boxShadow: token.shadow,
+                  flexShrink: 0,
+                }}
+              />
+              <div style={{ flex: 1 }}>
+                <strong>{token.name}</strong>
+                <br />
+                <small style={{ color: "var(--muted)" }}>{token.value}</small>
+              </div>
+              <CopyButton value={token.value} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Borders */}
+      <section style={{ padding: "24px 0" }}>
+        <h2 style={{ fontSize: "20px", margin: "12px 0" }}>Border Width</h2>
+        <div
+          className="grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "14px",
+          }}
+        >
+          {borderTokens.map((token, i) => (
+            <div
+              key={i}
+              className="token"
+              style={{
+                display: "flex",
+                gap: "12px",
+                alignItems: "center",
+                border: "1px solid var(--border)",
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 40%)",
+                borderRadius: "var(--radius-md)",
+                padding: "12px",
+              }}
+            >
+              <div
+                className="swatch"
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "12px",
+                  border: `${token.value} solid var(--accent)`,
+                  background: "#0f1117",
+                  flexShrink: 0,
+                }}
+              />
+              <div style={{ flex: 1 }}>
+                <strong>{token.name}</strong>
+                <br />
+                <small style={{ color: "var(--muted)" }}>{token.value}</small>
+              </div>
+              <CopyButton value={token.value} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Opacity */}
+      <section style={{ padding: "24px 0" }}>
+        <h2 style={{ fontSize: "20px", margin: "12px 0" }}>Opacity</h2>
+        <div
+          className="grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "14px",
+          }}
+        >
+          {opacityTokens.map((token, i) => (
+            <div
+              key={i}
+              className="token"
+              style={{
+                display: "flex",
+                gap: "12px",
+                alignItems: "center",
+                border: "1px solid var(--border)",
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 40%)",
+                borderRadius: "var(--radius-md)",
+                padding: "12px",
+              }}
+            >
+              <div
+                className="swatch"
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "var(--accent)",
+                  opacity: token.value,
+                  flexShrink: 0,
+                }}
+              />
+              <div style={{ flex: 1 }}>
+                <strong>{token.name}</strong>
+                <br />
+                <small style={{ color: "var(--muted)" }}>{token.value}</small>
+              </div>
+              <CopyButton value={token.value} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Z-index */}
+      <section style={{ padding: "24px 0" }}>
+        <h2 style={{ fontSize: "20px", margin: "12px 0" }}>Z-index</h2>
+        <div
+          className="grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "14px",
+          }}
+        >
+          {zIndexTokens.map((token, i) => (
+            <div
+              key={i}
+              className="token"
+              style={{
+                display: "flex",
+                gap: "12px",
+                alignItems: "center",
+                border: "1px solid var(--border)",
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 40%)",
+                borderRadius: "var(--radius-md)",
+                padding: "12px",
+              }}
+            >
+              <div
+                className="swatch"
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "var(--surface)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "18px",
+                  fontWeight: 700,
+                  flexShrink: 0,
+                }}
+              >
+                {token.value}
+              </div>
+              <div style={{ flex: 1 }}>
+                <strong>{token.name}</strong>
+                <br />
+                <small style={{ color: "var(--muted)" }}>{token.value}</small>
+              </div>
+              <CopyButton value={token.value} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Motion */}
+      <section style={{ padding: "24px 0" }}>
+        <h2 style={{ fontSize: "20px", margin: "12px 0" }}>Motion</h2>
+        <div
+          className="grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "14px",
+          }}
+        >
+          {motionTokens.map((token, i) => (
+            <div
+              key={i}
+              className="token"
+              style={{
+                display: "flex",
+                gap: "12px",
+                alignItems: "center",
+                border: "1px solid var(--border)",
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 40%)",
+                borderRadius: "var(--radius-md)",
+                padding: "12px",
+              }}
+            >
+              <div
+                className="swatch"
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "var(--accent)",
                   flexShrink: 0,
                 }}
               />
