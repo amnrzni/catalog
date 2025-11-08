@@ -9,7 +9,7 @@ import React from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Card, CardHeader, CardContent } from '@/components/Card';
 import { useTheme } from '@/components/ThemeProvider';
-import { themes, tokensToCssVars } from '@/lib/theme-tokens';
+import { themes } from '@/lib/theme-tokens';
 
 export default function TokensPage() {
   const { theme, themeName } = useTheme();
