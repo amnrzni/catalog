@@ -8,8 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "migrate": "node migrate-to-uiux-catalog.js",
-    "setup": "bash setup-uiux-catalog.sh"
+    "setup": "node setup-project.js",
+    "organize": "node organize-pages.js",
+    "postsetup": "node organize-pages.js",
+    "migrate": "node migrate-to-uiux-catalog.js"
   },
   "dependencies": {
     "react": "^18.3.1",

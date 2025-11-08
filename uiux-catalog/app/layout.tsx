@@ -1,12 +1,35 @@
 import type { Metadata } from 'next';
+import { Inter, Roboto, Poppins } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/contexts/ThemeContext';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import { AnimationProvider } from '@/contexts/AnimationContext';
 
+// Font configurations
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '700', '900'],
+  variable: '--font-roboto',
+  display: 'swap',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Design Catalog - Modern UI/UX Styles',
+  title: 'Aurora Analytics - Multi-Theme Design Catalog',
   description:
-    'Explore Glassmorphism, Neumorphism, Material Design, and Minimalism with interactive components. A comprehensive design system showcase.',
+    'Explore Glassmorphism, Neumorphism, Material Design, and Minimalism with a complete multi-theme design system powered by CSS custom properties.',
   keywords: [
     'design system',
     'glassmorphism',
@@ -17,14 +40,16 @@ export const metadata: Metadata = {
     'React',
     'Next.js',
     'TypeScript',
+    'CSS custom properties',
+    'design tokens',
   ],
   authors: [{ name: 'amnrzni' }],
   creator: 'amnrzni',
   openGraph: {
     type: 'website',
-    title: 'Design Catalog - Modern UI/UX Styles',
-    description: 'Explore 4 modern design styles with interactive components',
-    siteName: 'Design Catalog',
+    title: 'Aurora Analytics - Multi-Theme Design Catalog',
+    description: 'Explore 4 modern design styles with a unified token system',
+    siteName: 'Aurora Analytics',
   },
 };
 
@@ -34,14 +59,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="min-h-screen bg-black text-text-primary antialiased">
+    <html 
+      lang="en" 
+      suppressHydrationWarning
+      className={`${inter.variable} ${roboto.variable} ${poppins.variable}`}
+    >
+      <body className="min-h-screen antialiased">
         <ThemeProvider>
           <AnimationProvider>{children}</AnimationProvider>
         </ThemeProvider>

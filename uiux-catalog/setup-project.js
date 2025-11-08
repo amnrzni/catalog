@@ -7,59 +7,29 @@ console.log('=====================================\n');
 // Directory structure
 const directories = [
   'app',
-  'app/glassmorphism',
-  'app/glassmorphism/components',
-  'app/glassmorphism/components/buttons',
-  'app/glassmorphism/components/cards',
-  'app/glassmorphism/components/forms',
+  'app/tokens',
+  'app/components',
+  'app/patterns',
+  'app/accessibility',
+  'app/guidelines',
   'components',
-  'components/shared',
-  'components/shared/ComponentShowcase',
-  'components/glassmorphism',
-  'components/glassmorphism/Button',
-  'components/glassmorphism/Button/variants',
-  'components/glassmorphism/Card',
-  'components/glassmorphism/Card/variants',
-  'components/glassmorphism/Input',
-  'components/glassmorphism/Input/variants',
-  'components/glassmorphism/Textarea',
-  'components/glassmorphism/Textarea/variants',
-  'components/glassmorphism/Toggle',
-  'components/glassmorphism/Toggle/variants',
-  'components/glassmorphism/Slider',
-  'components/glassmorphism/Slider/variants',
-  'components/glassmorphism/Tabs',
-  'components/glassmorphism/Tabs/variants',
-  'components/glassmorphism/Navbar',
-  'components/glassmorphism/Navbar/variants',
+  'components/theme',
   'contexts',
   'hooks',
   'lib',
   'lib/animations',
   'lib/utils',
+  'lib/tokens',
+  'lib/data',
   'types',
   'public',
-  'public/images'
+  'public/images',
+  'docs',
+  'styles'
 ];
 
 // File mappings (source -> destination)
-const fileMappings = {
-  'types.index.ts': 'types/index.ts',
-  'lib.utils.cn.ts': 'lib/utils/cn.ts',
-  'lib.animations.variants.ts': 'lib/animations/variants.ts',
-  'ThemeContext.tsx': 'contexts/ThemeContext.tsx',
-  'AnimationContext.tsx': 'contexts/AnimationContext.tsx',
-  'app.layout.tsx': 'app/layout.tsx',
-  'app.globals.css': 'app/globals.css',
-  'app.page.tsx': 'app/page.tsx',
-  'components.glassmorphism.Button.index.tsx': 'components/glassmorphism/Button/index.tsx',
-  'components.glassmorphism.Button.animations.ts': 'components/glassmorphism/Button/animations.ts',
-  'components.glassmorphism.Card.index.tsx': 'components/glassmorphism/Card/index.tsx',
-  'components.glassmorphism.Input.index.tsx': 'components/glassmorphism/Input/index.tsx',
-  'components.glassmorphism.Toggle.index.tsx': 'components/glassmorphism/Toggle/index.tsx',
-  'components.glassmorphism.Slider.index.tsx': 'components/glassmorphism/Slider/index.tsx',
-  'components.glassmorphism.Tabs.index.tsx': 'components/glassmorphism/Tabs/index.tsx',
-};
+const fileMappings = {};
 
 // Create directories
 console.log('📁 Creating directories...');
