@@ -27,6 +27,11 @@ export function Button({
   className,
   onClick,
   ariaLabel,
+  style: _style, // Destructure but don't use - prevents conflict with motion.button
+  animate: _animate, // Not used in Button
+  animationSpeed: _animationSpeed, // Not used in Button
+  active: _active, // Not used in Button
+  ariaDescribedBy: _ariaDescribedBy, // Not used in Button
   ...props
 }: ButtonProps) {
   const { animationEnabled } = useAnimation();

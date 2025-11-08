@@ -10,7 +10,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TabsProps, TabItem } from '@/types';
+import { TabsProps } from '@/types';
 import { cn } from '@/lib/utils/cn';
 import { useAnimation } from '@/contexts/AnimationContext';
 
@@ -20,6 +20,17 @@ export function Tabs({
   activeTab: controlledActiveTab,
   onChange,
   className,
+  style: _style, // Destructure but don't use - prevents conflict with motion elements
+  variant: _variant, // Not used in Tabs
+  animate: _animate, // Not used in Tabs
+  animationSpeed: _animationSpeed, // Not used in Tabs
+  active: _active, // Not used in Tabs
+  loading: _loading, // Not used in Tabs
+  disabled: _disabled, // Not used in Tabs (tabs have their own disabled prop)
+  onClick: _onClick, // Not used in Tabs
+  ariaLabel: _ariaLabel, // Not used in Tabs
+  ariaDescribedBy: _ariaDescribedBy, // Not used in Tabs
+  size: _size, // Not used in Tabs
   ...props
 }: TabsProps) {
   const [activeTab, setActiveTab] = useState(
@@ -47,7 +58,7 @@ export function Tabs({
     onChange?.(tabId);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     const enabledTabs = tabs.filter(tab => !tab.disabled);
     const currentIndex = enabledTabs.findIndex(tab => tab.id === activeTab);
 
@@ -91,7 +102,7 @@ export function Tabs({
         />
 
         {/* Tab Buttons */}
-        {tabs.map((tab, index) => {
+        {tabs.map((tab) => {
           const isActive = tab.id === currentActiveTab;
           const isDisabled = tab.disabled;
 
@@ -106,7 +117,7 @@ export function Tabs({
               aria-disabled={isDisabled}
               disabled={isDisabled}
               onClick={() => !isDisabled && handleTabClick(tab.id)}
-              onKeyDown={e => handleKeyDown(e, index)}
+              onKeyDown={handleKeyDown}
               className={cn(
                 'relative z-10 flex flex-1 items-center justify-center gap-2 px-4 py-2',
                 'rounded-md text-sm font-medium transition-colors duration-200',

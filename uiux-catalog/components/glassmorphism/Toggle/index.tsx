@@ -22,6 +22,14 @@ export function Toggle({
   disabled = false,
   size = 'md',
   className,
+  style: _style, // Destructure but don't use - prevents conflict with motion elements
+  animate: _animate, // Not used in Toggle
+  animationSpeed: _animationSpeed, // Not used in Toggle
+  active: _active, // Not used in Toggle
+  loading: _loading, // Not used in Toggle
+  onClick: _onClick, // Not used in Toggle
+  ariaLabel: _ariaLabel, // Not used in Toggle
+  ariaDescribedBy: _ariaDescribedBy, // Not used in Toggle
   ...props
 }: ToggleProps) {
   const { animationEnabled } = useAnimation();
@@ -36,6 +44,7 @@ export function Toggle({
     sm: { track: 'w-10 h-6', thumb: 'h-5 w-5', translate: 'translate-x-4' },
     md: { track: 'w-12 h-7', thumb: 'h-6 w-6', translate: 'translate-x-5' },
     lg: { track: 'w-14 h-8', thumb: 'h-7 w-7', translate: 'translate-x-6' },
+    xl: { track: 'w-16 h-9', thumb: 'h-8 w-8', translate: 'translate-x-7' },
   };
 
   const styles = sizeStyles[size];

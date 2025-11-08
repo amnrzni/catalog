@@ -3,33 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-
-// Placeholder animation hook until setup completes
-// After setup, replace with: import { useAnimation } from '@/contexts/AnimationContext';
-const useAnimation = () => ({ animationEnabled: true });
-
-// Placeholder animation variants until setup completes
-// After setup, replace with imports from '@/lib/animations/variants'
-const pageTransition = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
-};
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
-};
-
-const staggerItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-};
+import { useAnimation } from '@/contexts/AnimationContext';
+import { pageTransition, fadeInUp, staggerContainer, staggerItem } from '@/lib/animations/variants';
 
 // Design style configurations
 const designStyles = [

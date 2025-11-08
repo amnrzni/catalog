@@ -29,6 +29,15 @@ export function Card({
   children,
   className,
   onClick,
+  style: _style, // Destructure but don't use - prevents conflict with motion.div
+  size: _size, // Not used in Card
+  disabled: _disabled, // Not used in Card
+  loading: _loading, // Not used in Card
+  active: _active, // Not used in Card
+  animate: _animate, // Not used in Card
+  animationSpeed: _animationSpeed, // Not used in Card
+  ariaLabel: _ariaLabel, // Not used in Card
+  ariaDescribedBy: _ariaDescribedBy, // Not used in Card
   ...props
 }: CardProps) {
   const { animationEnabled } = useAnimation();

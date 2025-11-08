@@ -5,9 +5,8 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'unsplash.com'],
   },
-  experimental: {
-    optimizeCss: true,
-  },
+  // Disable font optimization to avoid network issues in CI/sandboxed environments
+  optimizeFonts: false,
 }
 
 module.exports = nextConfig
