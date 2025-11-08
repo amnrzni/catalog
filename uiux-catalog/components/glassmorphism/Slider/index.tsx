@@ -22,6 +22,15 @@ export function Slider({
   showValue = true,
   disabled = false,
   className,
+  style: _style, // Destructure but don't use - prevents conflict with motion elements
+  animate: _animate, // Not used in Slider
+  animationSpeed: _animationSpeed, // Not used in Slider
+  active: _active, // Not used in Slider
+  loading: _loading, // Not used in Slider
+  onClick: _onClick, // Not used in Slider
+  ariaLabel: _ariaLabel, // Not used in Slider
+  ariaDescribedBy: _ariaDescribedBy, // Not used in Slider
+  size: _size, // Not used in Slider
   ...props
 }: SliderProps) {
   const [internalValue, setInternalValue] = useState(value);

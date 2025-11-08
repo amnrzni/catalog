@@ -30,6 +30,15 @@ export function Input({
   maxLength,
   autoComplete,
   className,
+  style: _style, // Destructure but don't use - prevents conflict with motion elements
+  size: _size, // Destructure but don't use - conflicts with HTML input size attribute
+  animate: _animate, // Not used in Input
+  animationSpeed: _animationSpeed, // Not used in Input
+  active: _active, // Not used in Input
+  loading: _loading, // Not used in Input
+  onClick: _onClick, // Not used in Input
+  ariaLabel: _ariaLabel, // Not used in Input (we use aria-label directly)
+  ariaDescribedBy: _ariaDescribedBy, // Not used in Input
   ...props
 }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
