@@ -7,6 +7,12 @@ console.log('======================================================\n');
 const rootDir = process.cwd();
 const baseDir = path.join(rootDir, 'uiux-catalog');
 
+// Ensure uiux-catalog exists
+if (!fs.existsSync(baseDir)) {
+  console.log('Creating /uiux-catalog directory...');
+  fs.mkdirSync(baseDir, { recursive: true });
+}
+
 // Step 1: Create directory structure
 console.log('Step 1: Creating directory structure...');
 const directories = [
@@ -24,11 +30,15 @@ const directories = [
   'public/images'
 ];
 
+let dirCount = 0;
 directories.forEach(dir => {
   const dirPath = path.join(baseDir, dir);
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
     console.log(`   ✓ Created: ${dir}`);
+    dirCount++;
+  } else {
+    console.log(`   - Exists: ${dir}`);
   }
 });
 
@@ -52,20 +62,36 @@ const fileMappings = {
   'components.glassmorphism.Tabs.index.tsx': 'components/glassmorphism/Tabs/index.tsx',
 };
 
+let copiedCount = 0;
+let failedCount = 0;
 Object.entries(fileMappings).forEach(([source, dest]) => {
   const sourcePath = path.join(rootDir, source);
   const destPath = path.join(baseDir, dest);
   
   if (fs.existsSync(sourcePath)) {
-    fs.copyFileSync(sourcePath, destPath);
-    console.log(`   ✓ ${source} → ${dest}`);
+    try {
+      // Ensure destination directory exists
+      const destDir = path.dirname(destPath);
+      if (!fs.existsSync(destDir)) {
+        fs.mkdirSync(destDir, { recursive: true });
+      }
+      
+      // Copy file
+      fs.copyFileSync(sourcePath, destPath);
+      console.log(`   ✓ ${source} → ${dest}`);
+      copiedCount++;
+    } catch (error) {
+      console.log(`   ✗ Failed to copy ${source}: ${error.message}`);
+      failedCount++;
+    }
   } else {
     console.log(`   - Not found: ${source}`);
+    failedCount++;
   }
 });
 
-// Step 3: Copy configuration files
-console.log('\nStep 3: Copying configuration files...');
+// Step 3: Verify config files exist
+console.log('\nStep 3: Verifying configuration files...');
 const configFiles = [
   'package.json',
   'tsconfig.json',
@@ -77,83 +103,46 @@ const configFiles = [
   '.gitignore'
 ];
 
+let configCount = 0;
 configFiles.forEach(file => {
-  const sourcePath = path.join(rootDir, file);
-  const destPath = path.join(baseDir, file);
-  
-  if (fs.existsSync(sourcePath)) {
-    fs.copyFileSync(sourcePath, destPath);
-    console.log(`   ✓ ${file}`);
+  const filePath = path.join(baseDir, file);
+  if (fs.existsSync(filePath)) {
+    console.log(`   ✓ ${file} exists`);
+    configCount++;
+  } else {
+    console.log(`   - ${file} missing (will be created by migration)`);
   }
 });
 
-// Step 4: Update next.config.js (no changes needed, it will work from the subdirectory)
-console.log('\nStep 4: Configuration files ready');
-
-// Step 5: Create/update tsconfig.json for path aliases
-console.log('\nStep 5: Updating tsconfig.json...');
-const tsconfigPath = path.join(baseDir, 'tsconfig.json');
-if (fs.existsSync(tsconfigPath)) {
-  const tsconfig = JSON.parse(fs.readFileSync(tsconfigPath, 'utf-8'));
-  
-  // Ensure paths are set correctly
-  if (!tsconfig.compilerOptions) tsconfig.compilerOptions = {};
-  if (!tsconfig.compilerOptions.paths) tsconfig.compilerOptions.paths = {};
-  
-  tsconfig.compilerOptions.paths['@/*'] = ['./*'];
-  tsconfig.compilerOptions.baseUrl = '.';
-  
-  fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2));
-  console.log('   ✓ Updated path aliases in tsconfig.json');
-}
-
-// Step 6: Create README for uiux-catalog
-console.log('\nStep 6: Creating README...');
-const readmeContent = `# UI/UX Catalog
-
-This directory contains the complete Next.js application for the Design Catalog.
-
-## Getting Started
-
-1. Install dependencies:
-   \`\`\`bash
-   npm install
-   \`\`\`
-
-2. Run development server:
-   \`\`\`bash
-   npm run dev
-   \`\`\`
-
-3. Build for production:
-   \`\`\`bash
-   npm run build
-   \`\`\`
-
-## Directory Structure
-
-- \`app/\` - Next.js 14 App Router pages
-- \`components/\` - React components
-- \`contexts/\` - React Context providers
-- \`lib/\` - Utility functions and animations
-- \`types/\` - TypeScript type definitions
-- \`public/\` - Static assets
-
-## Deployment
-
-This app is configured for deployment on Vercel.
-`;
-
-fs.writeFileSync(path.join(baseDir, 'README.md'), readmeContent);
-console.log('   ✓ Created README.md');
+// Summary
+console.log('\n' + '='.repeat(60));
+console.log('✅ MIGRATION SUMMARY');
+console.log('='.repeat(60));
+console.log(`Directories created:     ${dirCount}/${directories.length}`);
+console.log(`Source files copied:     ${copiedCount}/${Object.keys(fileMappings).length}`);
+console.log(`Config files present:    ${configCount}/${configFiles.length}`);
+console.log(`Files failed/not found:  ${failedCount}`);
+console.log('='.repeat(60));
 
 console.log('\n✅ Migration complete!');
-console.log('\nNext steps:');
-console.log('1. cd uiux-catalog');
-console.log('2. npm install');
-console.log('3. npm run build');
-console.log('4. npm run dev\n');
-console.log('For Vercel deployment:');
-console.log('- Root Directory: uiux-catalog');
-console.log('- Build Command: npm run build');
-console.log('- Output Directory: .next\n');
+
+if (copiedCount > 0) {
+  console.log('\nNext steps:');
+  console.log('1. cd uiux-catalog');
+  console.log('2. npm install');
+  console.log('3. npm run build');
+  console.log('4. npm run dev\n');
+  
+  console.log('For Vercel deployment:');
+  console.log('- The vercel.json is already configured');
+  console.log('- Just push to GitHub and deploy!');
+} else {
+  console.log('\n⚠️  No source files were copied.');
+  console.log('This might be because:');
+  console.log('1. Files have already been migrated');
+  console.log('2. Source files don\'t exist at the root');
+  console.log('\nCheck the /uiux-catalog directory to verify files exist.');
+}
+
+console.log('');
+
