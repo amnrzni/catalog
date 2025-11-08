@@ -108,8 +108,8 @@ export function Button({
   const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (disabled || isLoading) return;
     e.currentTarget.style.transform = 'translateY(0)';
-    e.currentTarget.style.boxShadow = variantStyles[variant].boxShadow || 'none';
-    e.currentTarget.style.background = variantStyles[variant].background || 'transparent';
+    e.currentTarget.style.boxShadow = (variantStyles[variant].boxShadow as string) || 'none';
+    e.currentTarget.style.background = (variantStyles[variant].background as string) || 'transparent';
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
