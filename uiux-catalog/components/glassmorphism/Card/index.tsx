@@ -18,7 +18,7 @@ import { cardHover } from '@/lib/animations/variants';
 import { useAnimation } from '@/contexts/AnimationContext';
 
 export function Card({
-  variant = 'primary',
+  variant: _variant = 'primary', // Not used in Card
   title,
   description,
   icon,
