@@ -92,7 +92,7 @@ export function Card({
   );
 }
 
-export interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title?: React.ReactNode;
   subtitle?: string;
   action?: React.ReactNode;
