@@ -14,7 +14,7 @@ import { Textarea } from '@/components/Textarea';
 import { Toggle } from '@/components/Toggle';
 import { Slider } from '@/components/Slider';
 import { StatCard } from '@/components/StatCard';
-import { ActivityFeed, ActivityItem } from '@/components/ActivityFeed';
+import { ActivityFeed } from '@/components/ActivityFeed';
 
 export default function ComponentsPage() {
   const [toggleState, setToggleState] = useState(true);
